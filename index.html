@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/logo.png">
+  <title>ManaraTHON · Fun Run Registration</title>
+  <!-- Google Fonts + Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #fff6ed 0%, #ffdcc0 100%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 1300px; margin: 0 auto; }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-radius: 60px; padding: 0.7rem 2rem; margin-bottom: 2.5rem;
+      box-shadow: 0 8px 24px rgba(200,90,20,0.12);
+      border: 1px solid rgba(255,200,160,0.5);
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .logo-area { display: flex; align-items: center; gap: 1rem; }
+    .logo-area img { height: 48px; width: auto; transition: transform 0.2s; }
+    .logo-area img:hover { transform: scale(1.02); }
+    .logo-area h1 {
+      font-size: 1.5rem; font-weight: 800;
+      background: linear-gradient(135deg, #b45309, #f97316);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .nav-buttons { display: flex; gap: 1rem; }
+    .nav-btn {
+      background: linear-gradient(95deg, #c2410c, #f97316);
+      border: none; padding: 0.7rem 1.6rem; border-radius: 40px;
+      font-weight: 700; font-size: 0.9rem; color: white; cursor: pointer;
+      transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(200,80,0,0.15);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .nav-btn:hover { background: linear-gradient(95deg, #9a3412, #ea580c); transform: translateY(-2px); }
+    .nav-btn-outline { background: transparent; border: 2px solid #f97316; color: #c2410c; box-shadow: none; }
+    .nav-btn-outline:hover { background: #f97316; color: white; }
+
+    /* Glass Card */
+    .glass-card {
+      background: rgba(255,250,245,0.94); backdrop-filter: blur(14px);
+      border-radius: 48px; padding: 2.5rem;
+      box-shadow: 0 25px 45px -10px rgba(180,70,0,0.18);
+      border: 1px solid rgba(255,220,180,0.7);
+      transition: transform 0.2s;
+    }
+    .glass-card:hover { transform: translateY(-3px); }
+
+    .event-title { text-align: center; margin-bottom: 1rem; }
+    .event-title .logo-partners {
+      display: flex; justify-content: center; align-items: center; gap: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    .event-title .logo-partners img {
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+    }
+    .event-title h2 {
+      font-size: 2.2rem; font-weight: 800;
+      background: linear-gradient(135deg, #b45309, #f97316);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .event-title .theme { font-size: 1rem; color: #9a5b3a; font-style: italic; }
+    .event-title .tagline { font-size: 0.9rem; color: #c2410c; font-weight: 600; margin-top: 0.3rem; }
+    .subhead { color: #7a4a2a; margin-bottom: 2rem; font-weight: 500; border-left: 4px solid #f97316; padding-left: 1rem; }
+
+    .section-title {
+      font-weight: 700; font-size: 1.5rem; margin: 2rem 0 1.2rem 0;
+      border-left: 5px solid #f97316; padding-left: 1rem;
+      color: #7a3a0a; display: flex; align-items: center; gap: 10px;
+    }
+    .section-title i { color: #f97316; font-size: 1.6rem; }
+    .section-title:first-of-type { margin-top: 0; }
+
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; }
+    .input-group { display: flex; flex-direction: column; gap: 0.6rem; }
+    .input-group label { font-weight: 600; color: #4a2a1a; font-size: 0.9rem; }
+    .input-group .hint { font-size: 0.7rem; color: #b07a5a; margin-top: -0.3rem; }
+
+    input, select, textarea {
+      padding: 0.9rem 1.2rem; border-radius: 32px;
+      border: 1.5px solid #fadbc8; background: white;
+      font-size: 0.95rem; font-family: 'Poppins', sans-serif;
+      transition: all 0.2s; outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #f97316; box-shadow: 0 0 0 4px rgba(249,115,22,0.15);
+    }
+    input:disabled, select:disabled { background: #f3f4f6; cursor: not-allowed; opacity: 0.7; }
+
+    .radio-group, .checkbox-group {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.5rem; padding: 0.25rem 0;
+    }
+    .radio-group label, .checkbox-group label {
+      font-weight: 500; display: flex; align-items: center; gap: 0.6rem;
+      cursor: pointer; padding: 0.25rem 0; color: #3a2a1a;
+    }
+    .radio-group label i { color: #f97316; width: 1.2rem; }
+
+    /* Distance cards */
+    .distance-options {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem; margin-top: 0.75rem;
+    }
+    .distance-card {
+      background: white; border: 2px solid #fadbc8; border-radius: 28px;
+      padding: 0.9rem 0.5rem; text-align: center; cursor: pointer;
+      transition: all 0.2s ease; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 4px;
+      font-weight: 500; color: #3a2a1a;
+    }
+    .distance-card i { color: #f97316; font-size: 1.4rem; }
+    .distance-card .dist-label { font-weight: 700; font-size: 1.1rem; }
+    .distance-card .dist-fee { font-size: 0.75rem; color: #7a5a4a; }
+    .distance-card .dist-time { font-size: 0.7rem; color: #b07a5a; }
+    .distance-card:hover { border-color: #f97316; background: #fff3e8; transform: translateY(-2px); }
+    .distance-card.selected {
+      background: linear-gradient(105deg, #f97316, #c2410c);
+      border-color: #f97316; color: white; box-shadow: 0 6px 14px rgba(249,115,22,0.3);
+    }
+    .distance-card.selected i { color: white; }
+    .distance-card.selected .dist-fee { color: #ffe4d0; }
+    .distance-card.selected .dist-time { color: #ffe4d0; }
+    .distance-card input { display: none; }
+    .selection-info {
+      font-size: 0.75rem; color: #c2410c; margin-top: 0.5rem;
+      padding: 0.25rem 0.75rem; background: #fff1e6; border-radius: 20px; display: inline-block;
+    }
+
+    .info-card {
+      background: linear-gradient(105deg, #fff1e6 0%, #ffe4d0 100%);
+      border-radius: 28px; padding: 1rem 1.5rem; margin: 1rem 0 1.2rem 0;
+      border-left: 6px solid #f97316; font-weight: 500; color: #6a3a1a;
+      font-size: 0.9rem; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .info-card i { margin-right: 8px; color: #c2410c; }
+
+    .payment-methods {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin: 0.5rem 0 1rem 0;
+    }
+    .payment-card {
+      background: white; border: 2px solid #fadbc8; border-radius: 24px;
+      padding: 1rem; text-align: center; cursor: default;
+      transition: all 0.2s;
+    }
+    .payment-card i { font-size: 2rem; color: #f97316; margin-bottom: 0.5rem; }
+    .payment-card .label { font-weight: 600; color: #3a2a1a; }
+    .payment-card .detail { font-size: 0.8rem; color: #7a5a4a; margin-top: 0.2rem; }
+
+    .receipt-upload {
+      border: 2px dashed #fadbc8; border-radius: 28px;
+      padding: 1.5rem; text-align: center; background: #fffaf5;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .receipt-upload:hover { border-color: #f97316; background: #fff3e8; }
+    .receipt-upload.has-file { border-color: #22c55e; background: #f0fdf4; }
+    .receipt-upload i { font-size: 2.5rem; color: #f97316; margin-bottom: 0.5rem; }
+    .receipt-upload .file-name { font-weight: 600; color: #3a2a1a; word-break: break-all; }
+    .receipt-upload .file-size { font-size: 0.8rem; color: #7a5a4a; }
+    .receipt-upload input[type="file"] { display: none; }
+
+    .submit-btn {
+      background: linear-gradient(95deg, #c2410c, #f97316);
+      border: none; padding: 1.2rem 2rem; width: 100%;
+      border-radius: 60px; font-weight: 800; font-size: 1.1rem;
+      color: white; cursor: pointer; transition: all 0.25s;
+      margin-top: 2rem; box-shadow: 0 10px 20px rgba(200,80,0,0.2);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .submit-btn:hover:not(:disabled) {
+      background: linear-gradient(95deg, #9a3412, #ea580c);
+      transform: scale(1.01); box-shadow: 0 18px 28px rgba(200,80,0,0.3);
+    }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; background: #9ca3af; }
+
+    .deadline-banner {
+      background: #7a1a1a; color: white; text-align: center;
+      padding: 0.8rem; border-radius: 40px; font-weight: 700;
+      margin-bottom: 1.5rem; border: 1px solid #f97316;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .deadline-banner i { color: #fbbf24; }
+
+    .toast-container {
+      position: fixed; bottom: 28px; right: 28px; z-index: 1200;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .toast-notification {
+      background: #2a1a0a; color: white; padding: 0.9rem 1.8rem;
+      border-radius: 60px; font-weight: 500; box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      backdrop-filter: blur(8px); animation: slideToast 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+      transition: opacity 0.3s; font-size: 0.9rem; display: flex; align-items: center; gap: 10px;
+    }
+    .toast-notification.success { background: #7a3a0a; border-left: 5px solid #f97316; }
+    .toast-notification.error { background: #7a1a1a; border-left: 5px solid #f97316; }
+    @keyframes slideToast { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 3000; visibility: hidden; opacity: 0; transition: 0.25s ease;
+    }
+    .modal-overlay.active { visibility: visible; opacity: 1; }
+
+    .modal-content {
+      background: white; max-width: 90%; max-height: 90vh;
+      border-radius: 24px; padding: 1.5rem;
+      box-shadow: 0 40px 60px rgba(0,0,0,0.4);
+      animation: modalPop 0.25s ease; position: relative;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .modal-content img {
+      max-width: 100%; max-height: 80vh; object-fit: contain;
+      border-radius: 12px;
+    }
+    .modal-close {
+      position: absolute; top: 10px; right: 16px;
+      background: none; border: none; font-size: 2rem;
+      font-weight: 700; color: #4a2a1a; cursor: pointer;
+      transition: 0.2s; line-height: 1; padding: 0 8px;
+      z-index: 10;
+    }
+    .modal-close:hover { color: #c2410c; transform: scale(1.1); }
+    @keyframes modalPop { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .chart-link {
+      display: inline-block; margin-top: 0.3rem; font-size: 0.8rem;
+      color: #c2410c; font-weight: 600; cursor: pointer;
+      text-decoration: underline; transition: 0.2s;
+    }
+    .chart-link:hover { color: #f97316; }
+
+    .size-options {
+      display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.5rem;
+    }
+    .size-options label {
+      font-weight: 500; display: flex; align-items: center; gap: 0.6rem;
+      cursor: pointer; color: #3a2a1a;
+      background: #f8fafc; padding: 0.4rem 1rem; border-radius: 40px;
+      border: 1.5px solid #fadbc8; transition: all 0.2s;
+    }
+    .size-options label:hover { border-color: #f97316; background: #fff3e8; }
+    .size-options input[type="radio"] { accent-color: #f97316; width: 16px; height: 16px; }
+
+    .registration-closed {
+      text-align: center; padding: 2rem; background: #fee2e2;
+      border-radius: 32px; color: #7a1a1a; font-weight: 600;
+    }
+
+    /* Size chart images displayed inline */
+    .size-chart-img {
+      width: 100%; max-width: 400px; border-radius: 12px;
+      border: 1px solid #fadbc8; margin-top: 0.5rem;
+      cursor: pointer; transition: transform 0.2s;
+    }
+    .size-chart-img:hover { transform: scale(1.01); }
+
+    @media (max-width: 760px) {
+      body { padding: 1rem; }
+      .glass-card { padding: 1.5rem; }
+      .top-nav { flex-direction: column; text-align: center; }
+      .logo-area h1 { font-size: 1.2rem; }
+      .event-title h2 { font-size: 1.6rem; }
+      .event-title .logo-partners { flex-direction: column; gap: 0.5rem; }
+      .event-title .logo-partners img { height: 50px; }
+      .section-title { font-size: 1.3rem; }
+      .form-grid { gap: 1.2rem; }
+      .distance-options { grid-template-columns: repeat(2, 1fr); }
+      .nav-buttons { width: 100%; justify-content: center; flex-wrap: wrap; }
+      .payment-methods { grid-template-columns: 1fr; }
+      .size-options { gap: 0.5rem; }
+      .size-options label { padding: 0.3rem 0.8rem; font-size: 0.85rem; }
+      .modal-content { padding: 1rem; max-width: 95%; }
+      .modal-close { font-size: 1.6rem; top: 6px; right: 10px; }
+      .size-chart-img { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- top navigation -->
+  <div class="top-nav">
+    <div class="logo-area">
+        <img src="https://wxyzofficial.sirv.com/WARAYA/Catbalogan-City.png" alt="Catbalogan City Official Seal" />
+      <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo" />
+    <h1>ManaraTHON 2026</h1>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-btn nav-btn-outline" id="guidelinesBtn"><i class="fas fa-scroll"></i> Guidelines</button>
+      <button class="nav-btn" id="staffLoginBtn"><i class="fas fa-user-lock"></i> Staff Login</button>
+    </div>
+  </div>
+
+  <!-- main registration glass card -->
+  <div class="glass-card" id="registrationCard">
+    <div class="event-title">
+      <div class="logo-partners">
+        <img src="https://wxyzofficial.sirv.com/WARAYA/Catbalogan-City.png" alt="Catbalogan City Official Seal">
+        <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo">
+      </div>
+      <h2><i class="fas fa-running" style="color:#f97316; margin-right:10px;"></i> ManaraTHON 2026</h2>
+      <div class="theme">WARAYA · Run with Purpose</div>
+      <div class="tagline">"Every stride tells a story."</div>
+    </div>
+
+    <!-- Deadline Banner -->
+    <div class="deadline-banner">
+      <i class="fas fa-clock"></i> Registration Deadline: <strong>July 31, 2026 at 11:59 PM</strong>
+      <i class="fas fa-flag-checkered"></i>
+    </div>
+
+    <div class="subhead"><i class="fas fa-shoe-prints" style="color:#f97316; margin-right:8px;"></i> Register now and join the most awaited fun run of the year!</div>
+
+    <!-- Event Schedule Info -->
+    <div class="info-card">
+      <i class="fas fa-calendar-alt"></i> <strong>Event Date:</strong> August 16, 2026 (Morning)
+      <br>
+      <i class="fas fa-clock"></i> <strong>Gun Start Times:</strong> 42Kms - 1:00 AM | 21Kms - 4:00 AM | 10Kms - 5:00 AM | 5Kms - 5:00 AM
+    </div>
+
+    <form id="registrationForm">
+      <!-- Personal Info -->
+      <div class="section-title"><i class="fas fa-user-circle"></i> Personal Information</div>
+      <div class="form-grid">
+        <div class="input-group">
+          <label><i class="fas fa-user" style="color:#f97316; margin-right:6px;"></i> Full Name *</label>
+          <input type="text" id="fullName" placeholder="e.g., Maria S. Reyes" required>
+          <div class="hint">First Name M.I. Last Name</div>
+        </div>
+        <div class="input-group"><label><i class="fas fa-birthday-cake" style="color:#f97316; margin-right:6px;"></i> Age *</label><input type="number" id="age" min="12" max="100" required></div>
+      </div>
+
+      <div class="input-group"><label><i class="fas fa-venus-mars" style="color:#f97316; margin-right:2px;"></i> Gender *</label>
+        <div class="radio-group">
+          <label><input type="radio" name="gender" value="Male" required> <i class="fas fa-male"></i> Male</label>
+          <label><input type="radio" name="gender" value="Female"> <i class="fas fa-female"></i> Female</label>
+          <label><input type="radio" name="gender" value="Non-binary"> <i class="fas fa-genderless"></i> Non-binary</label>
+          <label><input type="radio" name="gender" value="Prefer not to say"> <i class="fas fa-question"></i> Prefer not to say</label>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="input-group"><label><i class="fas fa-map-pin" style="color:#f97316; margin-right:6px;"></i> Complete Address *</label><input type="text" id="address" placeholder="Street, City, Province" required></div>
+        <div class="input-group"><label><i class="fas fa-phone-alt" style="color:#f97316; margin-right:6px;"></i> Contact Number *</label><input type="tel" id="contactNumber" placeholder="+63 XXX XXX XXXX" required></div>
+      </div>
+
+      <!-- Emergency -->
+      <div class="section-title"><i class="fas fa-ambulance"></i> Emergency Contact</div>
+      <div class="form-grid">
+        <div class="input-group"><label><i class="fas fa-user-md"></i> Full Name *</label><input type="text" id="emergencyName" required></div>
+        <div class="input-group"><label><i class="fas fa-user-friends"></i> Relationship *</label><input type="text" id="emergencyRelation" placeholder="Parent / Sibling / Friend" required></div>
+        <div class="input-group"><label><i class="fas fa-phone-square"></i> Emergency Number *</label><input type="tel" id="emergencyPhone" required></div>
+      </div>
+
+      <!-- Shirt & Singlet -->
+      <div class="section-title"><i class="fas fa-tshirt"></i> Shirt & Singlet Preference</div>
+      
+      <div class="input-group">
+        <label><i class="fas fa-tshirt"></i> Preferred Shirt Size *</label>
+        <!-- Shirt Size Chart -->
+        <img src="https://wxyzofficial.sirv.com/WARAYA/shirt%20size%20chart.jpg" alt="Shirt Size Chart" class="size-chart-img" id="shirtChartImg">
+        <div class="size-options">
+          <label><input type="radio" name="shirtSize" value="XS" required> XS</label>
+          <label><input type="radio" name="shirtSize" value="S"> S</label>
+          <label><input type="radio" name="shirtSize" value="M"> M</label>
+          <label><input type="radio" name="shirtSize" value="L"> L</label>
+          <label><input type="radio" name="shirtSize" value="XL"> XL</label>
+          <label><input type="radio" name="shirtSize" value="XXL"> XXL</label>
+          <label><input type="radio" name="shirtSize" value="XXXL"> XXXL</label>
+        </div>
+        <div class="hint">Regular event shirt</div>
+      </div>
+
+      <div class="input-group">
+        <label><i class="fas fa-tshirt"></i> Preferred Singlet Size *</label>
+        <!-- Singlet Size Chart -->
+        <img src="https://wxyzofficial.sirv.com/WARAYA/singlet%20size%20chart2.jpg" alt="Singlet Size Chart" class="size-chart-img" id="singletChartImg">
+        <div class="size-options">
+          <label><input type="radio" name="singletSize" value="XS" required> XS</label>
+          <label><input type="radio" name="singletSize" value="S"> S</label>
+          <label><input type="radio" name="singletSize" value="M"> M</label>
+          <label><input type="radio" name="singletSize" value="L"> L</label>
+          <label><input type="radio" name="singletSize" value="XL"> XL</label>
+          <label><input type="radio" name="singletSize" value="XXL"> XXL</label>
+          <label><input type="radio" name="singletSize" value="XXXL"> XXXL</label>
+        </div>
+        <div class="hint">Running singlet for the race</div>
+      </div>
+
+      <!-- Distance selection -->
+      <div class="section-title"><i class="fas fa-route"></i> Select Your Run Distance *</div>
+      <div class="distance-options" id="distanceOptionsContainer">
+        <div class="distance-card" data-distance="5K">
+          <i class="fas fa-walking"></i>
+          <span class="dist-label">5K</span>
+          <span class="dist-fee">Fee: ₱800</span>
+          <span class="dist-time">Gun Start: 5:00 AM</span>
+          <input type="radio" name="distance" value="5K" style="display: none;">
+        </div>
+        <div class="distance-card" data-distance="10K">
+          <i class="fas fa-running"></i>
+          <span class="dist-label">10K</span>
+          <span class="dist-fee">Fee: ₱1,000</span>
+          <span class="dist-time">Gun Start: 5:00 AM</span>
+          <input type="radio" name="distance" value="10K" style="display: none;">
+        </div>
+        <div class="distance-card" data-distance="21K">
+          <i class="fas fa-trophy"></i>
+          <span class="dist-label">21K</span>
+          <span class="dist-fee">Fee: ₱1,200</span>
+          <span class="dist-time">Gun Start: 4:00 AM</span>
+          <input type="radio" name="distance" value="21K" style="display: none;">
+        </div>
+        <div class="distance-card" data-distance="42K">
+          <i class="fas fa-crown"></i>
+          <span class="dist-label">42K</span>
+          <span class="dist-fee">Fee: ₱1,400</span>
+          <span class="dist-time">Gun Start: 1:00 AM</span>
+          <input type="radio" name="distance" value="42K" style="display: none;">
+        </div>
+      </div>
+      <div class="selection-info" id="selectionInfo"><i class="fas fa-arrow-right"></i> Select one distance</div>
+
+      <!-- PAYMENT SECTION -->
+      <div class="section-title"><i class="fas fa-credit-card"></i> Payment Details</div>
+      <div class="info-card"><i class="fas fa-coins"></i> Registration fee depends on selected distance. Payment must be completed to confirm your slot.</div>
+
+      <div class="payment-methods">
+        <div class="payment-card">
+          <i class="fas fa-mobile-alt"></i>
+          <div class="label">GCash</div>
+          <div class="detail">Account: 0917 123 4567</div>
+          <div class="detail" style="font-size:0.7rem; color:#b07a5a;">(WARAYA Youth Advocates)</div>
+        </div>
+        <div class="payment-card">
+          <i class="fas fa-university"></i>
+          <div class="label">Bank Transfer</div>
+          <div class="detail">BDO: 0012 3456 7890</div>
+          <div class="detail" style="font-size:0.7rem; color:#b07a5a;">(WARAYA Youth Advocates)</div>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="input-group">
+          <label><i class="fas fa-receipt"></i> Reference Number *</label>
+          <input type="text" id="referenceNumber" placeholder="e.g., GCASH-1234567890" required>
+          <div class="hint">Enter the transaction reference number from your payment</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label><i class="fas fa-file-image"></i> Upload Payment Receipt / Screenshot *</label>
+        <div class="receipt-upload" id="receiptUploadArea">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <div class="file-name" id="fileNameDisplay">Click or drag to upload receipt</div>
+          <div class="file-size" id="fileSizeDisplay">Max 25MB · PNG, JPG, PDF</div>
+          <input type="file" id="receiptFile" accept="image/png,image/jpeg,image/jpg,application/pdf">
+        </div>
+        <div class="hint">Attach a clear screenshot or photo of your payment confirmation.</div>
+      </div>
+
+      <!-- Medical -->
+      <div class="section-title"><i class="fas fa-heartbeat"></i> Medical Condition</div>
+      <div class="input-group">
+        <div class="radio-group">
+          <label><input type="radio" name="medicalConditionRadio" id="medicalNone" value="None" checked> <i class="fas fa-check"></i> None</label>
+          <label><input type="radio" name="medicalConditionRadio" id="medicalYes" value="Yes"> <i class="fas fa-exclamation-triangle"></i> Yes (specify)</label>
+        </div>
+        <div id="medicalConditionField" style="display:none; margin-top: 10px;">
+          <input type="text" id="medicalConditionText" placeholder="Please describe" style="width:100%">
+        </div>
+      </div>
+
+      <!-- Waiver -->
+      <div class="section-title"><i class="fas fa-file-signature"></i> Waiver & Consent</div>
+      <label style="display: flex; gap: 14px; align-items: flex-start; margin-bottom: 1rem; background: #fff8f0; padding: 1rem; border-radius: 28px; border:1px solid #fadbc8;">
+        <input type="checkbox" id="waiverCheck" style="width: 22px; height: 22px; margin-top: 2px;">
+        <span style="font-size: 0.9rem; font-weight: 500;">"I voluntarily join the ManaraTHON fun run and understand that the organizers are not liable for injuries, accidents, or loss of personal belongings."</span>
+      </label>
+      <div class="input-group"><label><i class="fas fa-calendar-day"></i> Date of Waiver *</label><input type="date" id="waiverDate" required></div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span><i class="fas fa-flag-checkered"></i> Register for ManaraTHON</span>
+        <span id="loadingSpinner" class="loading-spinner" style="display:none;"></span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Size Chart Modal -->
+<div id="sizeChartModal" class="modal-overlay">
+  <div class="modal-content" id="modalContent">
+    <button class="modal-close" id="closeModalBtn"><i class="fas fa-times"></i></button>
+    <img id="chartImage" src="" alt="Size Chart">
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal-overlay" style="z-index: 2000;">
+  <div class="modal-content">
+    <h3><i class="fas fa-check-circle" style="color:#f97316;"></i> Registration Successful!</h3>
+    <p>You are now officially registered for the ManaraTHON 2026 fun run.<br>See you at the starting line!</p>
+    <p style="font-size: 0.9rem; font-style: italic; color:#7a3a0a;"><i class="fas fa-heart" style="color:#f97316;"></i> Once a WARAYA, Always a WARAYA.</p>
+    <div class="modal-buttons">
+      <button class="modal-btn" id="modalOkBtn"><i class="fas fa-thumbs-up"></i> Awesome!</button>
+      <button class="modal-btn modal-btn-outline" id="closeSuccessModalBtn"><i class="fas fa-times"></i> Close</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC2jwodhMqk3_fHYZiM8oPeRBb4MtXcMzQ",
+    authDomain: "waraya-e1de8.firebaseapp.com",
+    projectId: "waraya-e1de8",
+    storageBucket: "waraya-e1de8.firebasestorage.app",
+    messagingSenderId: "140173641530",
+    appId: "1:140173641530:web:7bdacc1c6c55bdf332f203",
+    measurementId: "G-EWG6DBRHSG"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const form = document.getElementById('registrationForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const loadingSpinner = document.getElementById('loadingSpinner');
+  const toastContainer = document.getElementById('toastContainer');
+  const successModal = document.getElementById('successModal');
+  const closeSuccessModalBtn = document.getElementById('closeSuccessModalBtn');
+  const modalOkBtn = document.getElementById('modalOkBtn');
+
+  // Size Chart Modal
+  const chartModal = document.getElementById('sizeChartModal');
+  const chartImage = document.getElementById('chartImage');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  // Chart URLs
+  const CHART_URLS = {
+    shirt: 'https://wxyzofficial.sirv.com/WARAYA/shirt%20size%20chart.jpg',
+    singlet: 'https://wxyzofficial.sirv.com/WARAYA/singlet%20size%20chart.jpg'
+  };
+
+  // Open chart modal when clicking on chart images
+  document.querySelectorAll('.size-chart-img').forEach(img => {
+    img.addEventListener('click', function() {
+      chartImage.src = this.src;
+      chartModal.classList.add('active');
+    });
+  });
+
+  // Close chart modal
+  function closeChartModal() {
+    chartModal.classList.remove('active');
+  }
+  closeModalBtn.addEventListener('click', closeChartModal);
+  chartModal.addEventListener('click', function(e) {
+    if (e.target === this) closeChartModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeChartModal();
+  });
+
+  // Medical
+  const medicalNone = document.getElementById('medicalNone');
+  const medicalYes = document.getElementById('medicalYes');
+  const medicalConditionField = document.getElementById('medicalConditionField');
+  const medicalConditionText = document.getElementById('medicalConditionText');
+
+  // Distance selection
+  const distanceCards = document.querySelectorAll('.distance-card');
+  const selectionInfo = document.getElementById('selectionInfo');
+  let selectedDistance = '';
+
+  // Receipt upload
+  const receiptFile = document.getElementById('receiptFile');
+  const receiptUploadArea = document.getElementById('receiptUploadArea');
+  const fileNameDisplay = document.getElementById('fileNameDisplay');
+  const fileSizeDisplay = document.getElementById('fileSizeDisplay');
+  let receiptBase64 = '';
+
+  // DEADLINE: July 31, 2026 at 11:59 PM
+  const DEADLINE = new Date('2026-07-31T23:59:59+08:00');
+
+  function isRegistrationClosed() {
+    return new Date() > DEADLINE;
+  }
+
+  function updateDistanceSelection() {
+    distanceCards.forEach(card => {
+      const radio = card.querySelector('input[type="radio"]');
+      if (radio.checked) {
+        card.classList.add('selected');
+        selectedDistance = radio.value;
+      } else {
+        card.classList.remove('selected');
+      }
+    });
+    if (selectedDistance) {
+      selectionInfo.innerHTML = `<i class="fas fa-check-circle"></i> Selected: ${selectedDistance}`;
+      selectionInfo.style.color = "#c2410c";
+    } else {
+      selectionInfo.innerHTML = `<i class="fas fa-arrow-right"></i> Select one distance`;
+    }
+  }
+
+  function initDistanceSelection() {
+    distanceCards.forEach(card => {
+      const radio = card.querySelector('input[type="radio"]');
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!radio.checked) {
+          distanceCards.forEach(c => c.querySelector('input[type="radio"]').checked = false);
+          radio.checked = true;
+          updateDistanceSelection();
+        } else {
+          radio.checked = false;
+          updateDistanceSelection();
+        }
+      });
+    });
+  }
+
+  function toggleMedicalField() {
+    if (medicalYes.checked) {
+      medicalConditionField.style.display = 'block';
+      medicalConditionText.required = true;
+    } else {
+      medicalConditionField.style.display = 'none';
+      medicalConditionText.required = false;
+      medicalConditionText.value = '';
+    }
+  }
+
+  // Receipt upload handler
+  receiptFile.addEventListener('change', function(e) {
+    const file = this.files[0];
+    if (!file) return;
+
+    if (file.size > 25 * 1024 * 1024) {
+      showToast('File size exceeds 25MB limit.', 'error');
+      this.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      receiptBase64 = ev.target.result;
+      receiptUploadArea.classList.add('has-file');
+      fileNameDisplay.textContent = file.name;
+      fileSizeDisplay.textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  receiptUploadArea.addEventListener('click', function(e) {
+    if (e.target.tagName !== 'INPUT') {
+      receiptFile.click();
+    }
+  });
+
+  receiptUploadArea.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    this.style.borderColor = '#f97316';
+    this.style.background = '#fff3e8';
+  });
+  receiptUploadArea.addEventListener('dragleave', function(e) {
+    e.preventDefault();
+    this.style.borderColor = '';
+    this.style.background = '';
+  });
+  receiptUploadArea.addEventListener('drop', function(e) {
+    e.preventDefault();
+    this.style.borderColor = '';
+    this.style.background = '';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      receiptFile.files = files;
+      receiptFile.dispatchEvent(new Event('change'));
+    }
+  });
+
+  medicalNone.addEventListener('change', toggleMedicalField);
+  medicalYes.addEventListener('change', toggleMedicalField);
+  toggleMedicalField();
+  initDistanceSelection();
+
+  // Check registration deadline and disable form if closed
+  function checkDeadlineAndDisable() {
+    if (isRegistrationClosed()) {
+      const allInputs = form.querySelectorAll('input, select, textarea, button');
+      allInputs.forEach(el => el.disabled = true);
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-times-circle"></i> Registration Closed';
+      submitBtn.style.background = '#9ca3af';
+      
+      const card = document.getElementById('registrationCard');
+      const closedMsg = document.createElement('div');
+      closedMsg.className = 'registration-closed';
+      closedMsg.innerHTML = '<i class="fas fa-lock" style="font-size:2rem; display:block; margin-bottom:0.5rem;"></i> Registration is now closed.<br>Thank you for your interest in ManaraTHON 2026!';
+      card.insertBefore(closedMsg, card.querySelector('form'));
+    }
+  }
+
+  checkDeadlineAndDisable();
+
+  function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast-notification ${type}`;
+    toast.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i> ${message}`;
+    toastContainer.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 3800);
+  }
+
+  function openSuccessModal() { successModal.classList.add('active'); }
+  function closeSuccessModal() { successModal.classList.remove('active'); }
+  if (closeSuccessModalBtn) closeSuccessModalBtn.addEventListener('click', closeSuccessModal);
+  if (modalOkBtn) modalOkBtn.addEventListener('click', closeSuccessModal);
+
+  document.getElementById('staffLoginBtn')?.addEventListener('click', () => window.location.href = 'login.html');
+  document.getElementById('guidelinesBtn')?.addEventListener('click', () => window.location.href = 'guidelines.html');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (isRegistrationClosed()) {
+      showToast('Registration is already closed.', 'error');
+      return;
+    }
+
+    const waiverCheckbox = document.getElementById('waiverCheck');
+    if (!waiverCheckbox.checked) {
+      showToast('Please accept the waiver & consent.', 'error');
+      return;
+    }
+
+    const distanceRadio = document.querySelector('input[name="distance"]:checked');
+    if (!distanceRadio) {
+      showToast('Please select a run distance.', 'error');
+      return;
+    }
+
+    const genderSelected = document.querySelector('input[name="gender"]:checked');
+    if (!genderSelected) {
+      showToast('Please select your gender.', 'error');
+      return;
+    }
+
+    const shirtSelected = document.querySelector('input[name="shirtSize"]:checked');
+    if (!shirtSelected) {
+      showToast('Please select your shirt size.', 'error');
+      return;
+    }
+
+    const singletSelected = document.querySelector('input[name="singletSize"]:checked');
+    if (!singletSelected) {
+      showToast('Please select your singlet size.', 'error');
+      return;
+    }
+
+    const referenceNumber = document.getElementById('referenceNumber').value.trim();
+    if (!referenceNumber) {
+      showToast('Please enter the payment reference number.', 'error');
+      return;
+    }
+
+    if (!receiptBase64) {
+      showToast('Please upload a payment receipt or screenshot.', 'error');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    loadingSpinner.style.display = 'inline-block';
+
+    try {
+      const userCred = await signInAnonymously(auth);
+      const uid = userCred.user.uid;
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const age = parseInt(document.getElementById('age').value);
+      const gender = genderSelected.value;
+      const address = document.getElementById('address').value.trim();
+      const contactNumber = document.getElementById('contactNumber').value.trim();
+      const emergencyName = document.getElementById('emergencyName').value.trim();
+      const emergencyRelation = document.getElementById('emergencyRelation').value.trim();
+      const emergencyPhone = document.getElementById('emergencyPhone').value.trim();
+      const shirtSize = shirtSelected.value;
+      const singletSize = singletSelected.value;
+      const distance = distanceRadio.value;
+      let medicalCondition = 'None';
+      if (medicalYes.checked) {
+        medicalCondition = medicalConditionText.value.trim() || 'Specified condition';
+      }
+      const waiverDate = document.getElementById('waiverDate').value;
+
+      const feeMap = { '5K': 800, '10K': 1000, '21K': 1200, '42K': 1400 };
+      const registrationFee = feeMap[distance] || 0;
+
+      if (!fullName || !age || !address || !contactNumber || 
+          !emergencyName || !emergencyRelation || !emergencyPhone || !waiverDate) {
+        showToast('Please complete all required fields.', 'error');
+        submitBtn.disabled = false;
+        loadingSpinner.style.display = 'none';
+        return;
+      }
+
+      const payload = {
+        fullName,
+        age,
+        gender,
+        address,
+        contactNumber,
+        emergencyContactName: emergencyName,
+        emergencyRelationship: emergencyRelation,
+        emergencyContactNumber: emergencyPhone,
+        shirtSize,
+        singletSize,
+        distance,
+        registrationFee,
+        medicalCondition,
+        waiverAccepted: true,
+        waiverDate,
+        paymentReference: referenceNumber,
+        receiptImageBase64: receiptBase64,
+        uid,
+        createdAt: serverTimestamp()
+      };
+
+      await addDoc(collection(db, "manarathon_registrations"), payload);
+      showToast('Registration successful! Ready to run!', 'success');
+      form.reset();
+      medicalNone.checked = true;
+      toggleMedicalField();
+      distanceCards.forEach(c => c.querySelector('input[type="radio"]').checked = false);
+      selectedDistance = '';
+      updateDistanceSelection();
+      document.querySelectorAll('input[name="gender"]').forEach(rb => rb.checked = false);
+      document.querySelectorAll('input[name="shirtSize"]').forEach(rb => rb.checked = false);
+      document.querySelectorAll('input[name="singletSize"]').forEach(rb => rb.checked = false);
+      waiverCheckbox.checked = false;
+      
+      receiptBase64 = '';
+      receiptFile.value = '';
+      receiptUploadArea.classList.remove('has-file');
+      fileNameDisplay.textContent = 'Click or drag to upload receipt';
+      fileSizeDisplay.textContent = 'Max 25MB · PNG, JPG, PDF';
+      
+      openSuccessModal();
+    } catch (error) {
+      console.error("Registration error:", error);
+      showToast('Registration failed: ' + error.message, 'error');
+    } finally {
+      submitBtn.disabled = false;
+      loadingSpinner.style.display = 'none';
+    }
+  });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) console.log("Anonymous user ready for ManaraTHON");
+  });
+</script>
+</body>
+</html>

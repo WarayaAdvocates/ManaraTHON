@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/logo.png">
+  <title>ManaRUNgat Staff Login</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #fff6ed 0%, #ffdcc0 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* subtle decorative elements */
+    body::before {
+      content: "\f70c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      font-size: 200px;
+      position: absolute;
+      bottom: -40px;
+      left: -60px;
+      opacity: 0.06;
+      pointer-events: none;
+      transform: rotate(-12deg);
+      color: #b45309;
+    }
+
+    body::after {
+      content: "\f70c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      font-size: 160px;
+      position: absolute;
+      top: -20px;
+      right: -40px;
+      opacity: 0.06;
+      pointer-events: none;
+      transform: rotate(15deg);
+      color: #b45309;
+    }
+
+    .login-container {
+      max-width: 520px;
+      width: 100%;
+      z-index: 2;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .glass-login {
+      background: rgba(255, 250, 245, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 64px;
+      padding: 2.5rem 2.2rem;
+      box-shadow: 0 45px 65px rgba(180, 70, 0, 0.15), 0 0 0 1px rgba(255, 220, 180, 0.5);
+      text-align: center;
+      transition: transform 0.25s ease;
+      border: 1px solid rgba(255, 200, 160, 0.4);
+    }
+
+    .glass-login:hover {
+      transform: translateY(-5px);
+    }
+
+    .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo {
+      width: 80px;
+      height: auto;
+      filter: drop-shadow(0 8px 16px rgba(180, 70, 0, 0.12));
+      transition: transform 0.2s;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #b45309, #f97316);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      margin-top: 0.1rem;
+    }
+
+    h2 i {
+      color: #f97316;
+      margin-right: 6px;
+    }
+
+    .sport-badge {
+      display: inline-block;
+      background: linear-gradient(95deg, #f97316, #c2410c);
+      padding: 0.2rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: white;
+      margin: 0.4rem 0 0.2rem;
+      letter-spacing: 0.5px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      color: #c2410c;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: all 0.2s;
+      padding: 6px 12px;
+      border-radius: 40px;
+    }
+
+    .back-link i {
+      font-size: 0.8rem;
+    }
+
+    .back-link:hover {
+      background: rgba(249, 115, 22, 0.1);
+      transform: translateX(-3px);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.5rem 0;
+      color: #b07a5a;
+      font-size: 0.8rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #fadbc8;
+    }
+
+    .divider::before { margin-right: 1rem; }
+    .divider::after { margin-left: 1rem; }
+
+    .input-group {
+      margin: 1.6rem 0;
+      text-align: left;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: #4a2a1a;
+      font-size: 0.9rem;
+    }
+
+    .input-group label i {
+      color: #f97316;
+      margin-right: 6px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 60px;
+      border: 1.5px solid #fadbc8;
+      background: white;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.25s;
+      outline: none;
+      padding-right: 70px;
+    }
+
+    .input-wrapper input:focus {
+      border-color: #f97316;
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: #c2410c;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 40px;
+      transition: 0.2s;
+    }
+
+    .toggle-password:hover {
+      background: #fff1e6;
+    }
+
+    .login-btn {
+      background: linear-gradient(95deg, #c2410c, #f97316);
+      width: 100%;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 0.8rem;
+      box-shadow: 0 8px 18px rgba(200, 80, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .login-btn:hover:not(:disabled) {
+      background: linear-gradient(95deg, #9a3412, #ea580c);
+      transform: scale(1.01);
+      box-shadow: 0 12px 24px rgba(200, 80, 0, 0.3);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .google-btn {
+      background: white;
+      border: 1.5px solid #fadbc8;
+      color: #4a2a1a;
+      box-shadow: none;
+    }
+
+    .google-btn:hover:not(:disabled) {
+      background: #fff8f0;
+      border-color: #f97316;
+      transform: scale(1.01);
+      box-shadow: 0 8px 18px rgba(200, 80, 0, 0.08);
+    }
+
+    .loading-spinner-small {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .dark-spinner {
+      border: 2.5px solid #fadbc8;
+      border-top-color: #f97316;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* toast */
+    .toast-stack {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 1500;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toast-message {
+      background: #2a1a0ac9;
+      backdrop-filter: blur(12px);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      animation: slideLeft 0.25s ease;
+      border-left: 5px solid;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast-message i {
+      font-size: 1rem;
+    }
+
+    .toast-message.error {
+      border-left-color: #f97316;
+      background: #7a1a1ad9;
+    }
+
+    .toast-message.success {
+      border-left-color: #f97316;
+      background: #7a3a0ad9;
+    }
+
+    @keyframes slideLeft {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* modal */
+    .modal-denied {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+
+    .modal-denied.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: white;
+      max-width: 400px;
+      width: 90%;
+      border-radius: 48px;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      box-shadow: 0 40px 55px rgba(0, 0, 0, 0.3);
+      animation: zoomModal 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid #fadbc8;
+    }
+
+    @keyframes zoomModal {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-card h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #b45309;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-card h3 i {
+      color: #f97316;
+      margin-right: 8px;
+    }
+
+    .modal-card p {
+      margin: 1rem 0;
+      color: #5a3a2a;
+    }
+
+    .modal-btn {
+      background: linear-gradient(95deg, #c2410c, #f97316);
+      border: none;
+      padding: 10px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: 0.2s;
+    }
+
+    .modal-btn:hover {
+      background: linear-gradient(95deg, #9a3412, #ea580c);
+    }
+
+    .sub-text {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #b07a5a;
+    }
+
+    .sub-text i {
+      color: #f97316;
+      margin-right: 4px;
+    }
+
+    @media (max-width: 550px) {
+      .glass-login { padding: 1.8rem; }
+      h2 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="glass-login">
+    <!-- Back button -->
+    <button class="back-link" id="backToFormBtn">
+      <i class="fas fa-arrow-left"></i> Back to Registration
+    </button>
+
+    <div class="logo-wrapper">
+      <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo" class="logo">
+    </div>
+    <h2><i class="fas fa-user-lock"></i> Staff Portal</h2>
+    <div class="sport-badge"><i class="fas fa-running" style="margin-right:6px;"></i> ManaRUNgat Committee</div>
+    <p style="margin: 0.6rem 0 0.2rem; color:#7a5a4a; font-size:0.9rem;">Authorized access only · Admin / Officers</p>
+
+    <!-- Email -->
+    <div class="input-group">
+      <label><i class="fas fa-envelope"></i> Email Address</label>
+      <div class="input-wrapper">
+        <input type="email" id="loginEmail" placeholder="officer@waraya.org" autocomplete="email">
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="input-group">
+      <label><i class="fas fa-lock"></i> Password</label>
+      <div class="input-wrapper">
+        <input type="password" id="loginPassword" placeholder="Enter your secure password" autocomplete="current-password">
+        <button class="toggle-password" id="togglePasswordBtn" type="button"><i class="fas fa-eye"></i> Show</button>
+      </div>
+    </div>
+
+    <button class="login-btn" id="loginBtn">
+      <span><i class="fas fa-sign-in-alt"></i> Sign in with Email</span>
+      <span id="loginLoader" style="display:none;" class="loading-spinner-small"></span>
+    </button>
+
+    <div class="divider"><i class="fas fa-circle" style="font-size:0.3rem; color:#f97316;"></i> OR <i class="fas fa-circle" style="font-size:0.3rem; color:#f97316;"></i></div>
+
+    <!-- Google Sign-In -->
+    <button class="login-btn google-btn" id="googleSignInBtn">
+      <span><i class="fab fa-google"></i> Sign in with Google</span>
+      <span id="googleLoader" style="display:none;" class="loading-spinner-small dark-spinner"></span>
+    </button>
+
+    <div class="sub-text"><i class="fas fa-shield-alt"></i> Secure authentication · WARAYA Youth Advocates</div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toastStack" class="toast-stack"></div>
+
+<!-- Access Denied Modal -->
+<div id="accessDeniedModal" class="modal-denied">
+  <div class="modal-card">
+    <h3><i class="fas fa-ban"></i> Access Denied</h3>
+    <p>Your account does not have <strong>Admin or Officer</strong> privileges.<br>Please contact the organization head.</p>
+    <button class="modal-btn" id="closeDeniedModal"><i class="fas fa-check"></i> Got it</button>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC2jwodhMqk3_fHYZiM8oPeRBb4MtXcMzQ",
+    authDomain: "waraya-e1de8.firebaseapp.com",
+    projectId: "waraya-e1de8",
+    storageBucket: "waraya-e1de8.firebasestorage.app",
+    messagingSenderId: "140173641530",
+    appId: "1:140173641530:web:7bdacc1c6c55bdf332f203",
+    measurementId: "G-EWG6DBRHSG"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const googleProvider = new GoogleAuthProvider();
+
+  const emailInput = document.getElementById('loginEmail');
+  const passwordInput = document.getElementById('loginPassword');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginLoader = document.getElementById('loginLoader');
+  const googleBtn = document.getElementById('googleSignInBtn');
+  const googleLoader = document.getElementById('googleLoader');
+  const toastStack = document.getElementById('toastStack');
+  const accessDeniedModal = document.getElementById('accessDeniedModal');
+  const closeDeniedBtn = document.getElementById('closeDeniedModal');
+  const backToFormBtn = document.getElementById('backToFormBtn');
+
+  function showToast(message, type = 'error') {
+    const toast = document.createElement('div');
+    toast.className = `toast-message ${type}`;
+    const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+    toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+    toastStack.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 3800);
+  }
+
+  closeDeniedBtn.addEventListener('click', () => {
+    accessDeniedModal.classList.remove('active');
+  });
+
+  backToFormBtn.addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+
+  const toggleBtn = document.getElementById('togglePasswordBtn');
+  toggleBtn.addEventListener('click', () => {
+    const type = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = type;
+    toggleBtn.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i> Show' : '<i class="fas fa-eye-slash"></i> Hide';
+  });
+
+  async function hasAdminOrOfficerRole(userId, email) {
+    try {
+      const userDocRef = doc(db, "users", userId);
+      const userSnap = await getDoc(userDocRef);
+      if (userSnap.exists()) {
+        const role = userSnap.data().role;
+        if (role === 'admin' || role === 'officer') return true;
+      }
+      const q = query(collection(db, "users"), where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const roleData = querySnapshot.docs[0].data().role;
+        if (roleData === 'admin' || roleData === 'officer') return true;
+      }
+      return false;
+    } catch (err) {
+      console.error("Role check error:", err);
+      return false;
+    }
+  }
+
+  async function handleSuccessfulLogin(user, email) {
+    const isAuthorized = await hasAdminOrOfficerRole(user.uid, email);
+    if (!isAuthorized) {
+      await signOut(auth);
+      accessDeniedModal.classList.add('active');
+      showToast('Access denied: Admin/Officer role required.', 'error');
+      return false;
+    }
+    showToast('Login successful! Redirecting to dashboard...', 'success');
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 800);
+    return true;
+  }
+
+  loginBtn.addEventListener('click', async () => {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      showToast('Please enter both email and password.', 'error');
+      return;
+    }
+
+    loginBtn.disabled = true;
+    loginLoader.style.display = 'inline-block';
+    loginBtn.querySelector('span:first-child').style.opacity = '0.7';
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      await handleSuccessfulLogin(userCredential.user, email);
+    } catch (error) {
+      let errorMsg = 'Authentication failed. ';
+      if (error.code === 'auth/user-not-found') errorMsg = 'No account found with this email.';
+      else if (error.code === 'auth/wrong-password') errorMsg = 'Incorrect password. Please try again.';
+      else if (error.code === 'auth/invalid-email') errorMsg = 'Invalid email format.';
+      else errorMsg += error.message;
+      showToast(errorMsg, 'error');
+      loginBtn.disabled = false;
+      loginLoader.style.display = 'none';
+      loginBtn.querySelector('span:first-child').style.opacity = '1';
+    }
+  });
+
+  googleBtn.addEventListener('click', async () => {
+    googleBtn.disabled = true;
+    googleLoader.style.display = 'inline-block';
+    googleBtn.querySelector('span:first-child').style.opacity = '0.7';
+
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      const email = user.email;
+
+      const isAuthorized = await hasAdminOrOfficerRole(user.uid, email);
+      if (!isAuthorized) {
+        await signOut(auth);
+        accessDeniedModal.classList.add('active');
+        showToast('Access denied: Admin/Officer role required.', 'error');
+        googleBtn.disabled = false;
+        googleLoader.style.display = 'none';
+        googleBtn.querySelector('span:first-child').style.opacity = '1';
+        return;
+      }
+
+      showToast('Google Sign-In successful! Redirecting...', 'success');
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 800);
+    } catch (error) {
+      let errorMsg = 'Google Sign-In failed. ';
+      if (error.code === 'auth/popup-closed-by-user') {
+        errorMsg = 'Sign-in popup was closed. Please try again.';
+      } else if (error.code === 'auth/popup-blocked') {
+        errorMsg = 'Pop-up blocked. Please allow pop-ups for this site.';
+      } else {
+        errorMsg += error.message;
+      }
+      showToast(errorMsg, 'error');
+      googleBtn.disabled = false;
+      googleLoader.style.display = 'none';
+      googleBtn.querySelector('span:first-child').style.opacity = '1';
+    }
+  });
+
+  [emailInput, passwordInput].forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        loginBtn.click();
+      }
+    });
+  });
+
+  (async () => {
+    try {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const authorized = await hasAdminOrOfficerRole(currentUser.uid, currentUser.email);
+        if (authorized) {
+          window.location.href = 'dashboard.html';
+        } else {
+          await signOut(auth);
+        }
+      }
+    } catch (err) {
+      console.log("Session check error:", err);
+    }
+  })();
+</script>
+</body>
+</html>

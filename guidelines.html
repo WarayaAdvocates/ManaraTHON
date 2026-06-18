@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/logo.png" />
+  <title>ManaraTHON 2026 · Official Guidelines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #fff6ed 0%, #ffdcc0 100%);
+      min-height: 100vh;
+    }
+
+    /* Navigation – Orange/White */
+    .nav-bar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 0.9rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(180, 70, 0, 0.10);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 200, 150, 0.4);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .logo-area img {
+      height: 44px;
+      width: auto;
+    }
+
+    .logo-area h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #b45309, #f97316);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: linear-gradient(95deg, #c2410c, #f97316);
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn i {
+      font-size: 0.9rem;
+    }
+
+    .nav-btn:hover {
+      background: linear-gradient(95deg, #9a3412, #ea580c);
+      transform: translateY(-2px);
+    }
+
+    .nav-btn-outline {
+      background: transparent;
+      border: 2px solid #f97316;
+      color: #c2410c;
+    }
+
+    .nav-btn-outline:hover {
+      background: #f97316;
+      color: white;
+    }
+
+    .pdf-btn {
+      background: #b45309;
+    }
+
+    .pdf-btn:hover {
+      background: #7a2e0a;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Hero */
+    .hero-section {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-section .logo-partners {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-section .logo-partners img {
+      height: 75px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .hero-section h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #b45309, #f97316);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-section .subtitle {
+      font-size: 1.1rem;
+      color: #7a4a2a;
+      font-weight: 500;
+    }
+
+    .hero-section .theme {
+      font-size: 1.1rem;
+      color: #c2410c;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-section .tagline {
+      font-size: 1rem;
+      color: #7a4a2a;
+      font-style: italic;
+    }
+
+    .hero-section .date-venue {
+      background: rgba(249, 115, 22, 0.12);
+      display: inline-block;
+      padding: 0.5rem 1.8rem;
+      border-radius: 60px;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: #7a3a0a;
+      border: 1px solid #fadbc8;
+    }
+
+    .date-venue i {
+      margin-right: 8px;
+      color: #f97316;
+    }
+
+    .deadline-banner {
+      background: #7a1a1a;
+      color: white;
+      text-align: center;
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 700;
+      margin: 1rem 0 2rem 0;
+      border: 1px solid #f97316;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .deadline-banner i {
+      color: #fbbf24;
+    }
+
+    /* PDF button */
+    .pdf-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn-pdf {
+      background: linear-gradient(95deg, #b45309, #f97316);
+      border: none;
+      padding: 0.8rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(200, 80, 0, 0.20);
+    }
+
+    .btn-pdf:hover {
+      background: linear-gradient(95deg, #7a2e0a, #c2410c);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(200, 80, 0, 0.25);
+    }
+
+    /* guideline cards */
+    .guidelines-section {
+      background: rgba(255, 250, 245, 0.93);
+      backdrop-filter: blur(8px);
+      border-radius: 32px;
+      padding: 2rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 25px rgba(180, 70, 0, 0.06);
+      border: 1px solid rgba(255, 220, 180, 0.6);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #7a3a0a;
+      border-left: 6px solid #f97316;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title i {
+      color: #f97316;
+      font-size: 1.6rem;
+    }
+
+    .subsection-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #c2410c;
+      margin: 1.2rem 0 0.8rem 0;
+      padding-left: 0.5rem;
+      border-left: 3px solid #f97316;
+    }
+
+    .rule-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .rule-list li {
+      padding: 0.5rem 0;
+      padding-left: 1.8rem;
+      position: relative;
+      color: #2a1a0a;
+      line-height: 1.5;
+    }
+
+    .rule-list li::before {
+      content: "▹";
+      color: #f97316;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+    }
+
+    .rule-number {
+      font-weight: 700;
+      color: #c2410c;
+      margin-right: 0.4rem;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 0.8rem 0;
+    }
+
+    .grid-3col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 0.8rem 0;
+    }
+
+    .info-badge {
+      background: white;
+      border-radius: 20px;
+      padding: 0.7rem 1.2rem;
+      border: 1px solid #fadbc8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      color: #3a2a1a;
+    }
+
+    .info-badge i {
+      color: #f97316;
+      font-size: 1.2rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #fadbc8;
+    }
+
+    th {
+      background: #f97316;
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:hover td {
+      background: #fff8f0;
+    }
+
+    .fee-table td:last-child,
+    .fee-table th:last-child {
+      text-align: center;
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 250, 245, 0.9);
+      border-radius: 32px;
+      margin-top: 2rem;
+      border: 1px solid rgba(255, 220, 180, 0.5);
+    }
+
+    .footer-note p {
+      color: #5a3a2a;
+      font-style: italic;
+    }
+
+    .footer-note i {
+      color: #f97316;
+      margin: 0 4px;
+    }
+
+    .numbered-list {
+      counter-reset: item;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .numbered-list li {
+      padding: 0.5rem 0;
+      padding-left: 2.5rem;
+      position: relative;
+      color: #2a1a0a;
+      line-height: 1.5;
+      counter-increment: item;
+    }
+
+    .numbered-list li::before {
+      content: counter(item) ".";
+      color: #f97316;
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+    }
+
+    .letter-list {
+      list-style: none;
+      padding-left: 2rem;
+    }
+
+    .letter-list li {
+      padding: 0.3rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: #2a1a0a;
+      line-height: 1.5;
+    }
+
+    .letter-list li::before {
+      content: "•";
+      color: #f97316;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .hero-section h1 { font-size: 1.9rem; }
+      .hero-section .logo-partners { flex-direction: column; gap: 0.5rem; }
+      .hero-section .logo-partners img { height: 55px; }
+      .section-title { font-size: 1.3rem; }
+      .nav-bar { flex-direction: column; text-align: center; }
+      .nav-links { justify-content: center; }
+      .guidelines-section { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="nav-bar">
+  <div class="logo-area">
+      <img src="https://wxyzofficial.sirv.com/WARAYA/Catbalogan-City.png" alt="Catbalogan City Official Seal" />
+      <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo" />
+    <h1>ManaraTHON 2026</h1>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn nav-btn-outline"><i class="fas fa-edit"></i> Registration</a>
+    <a href="login.html" class="nav-btn"><i class="fas fa-user-lock"></i> Staff Login</a>
+    <button class="nav-btn pdf-btn" id="viewFullPdfBtn"><i class="fas fa-file-pdf"></i> Full PDF</button>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="logo-partners">
+      <img src="https://wxyzofficial.sirv.com/WARAYA/Catbalogan-City.png" alt="Catbalogan City Official Seal" />
+      <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo" />
+    </div>
+    <h1><i class="fas fa-running" style="color:#f97316; margin-right:8px;"></i> ManaraTHON 2026</h1>
+    <div class="subtitle">First Catbalogan City Manaragat Marathon and Fun Run</div>
+    <div class="theme">Run with Purpose · Run with Pride</div>
+    <div class="tagline">"Every stride tells a story."</div>
+    <div class="date-venue"><i class="fas fa-calendar-alt"></i> August 16, 2026 · <i class="fas fa-map-pin"></i> Catbalogan City, Samar</div>
+  </div>
+
+  <!-- Deadline Banner -->
+  <div class="deadline-banner">
+    <i class="fas fa-clock"></i>
+    <span><strong>Registration Deadline:</strong> July 31, 2026 at 11:59 PM</span>
+    <i class="fas fa-flag-checkered"></i>
+  </div>
+
+  <!-- PDF download -->
+  <div class="pdf-container">
+    <button class="btn-pdf" id="downloadPdfBtn"><i class="fas fa-download"></i> Download Official Guidelines (PDF)</button>
+  </div>
+
+  <!-- I. General Information -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-info-circle"></i> I. General Information</h2>
+    <ol class="numbered-list">
+      <li>The <strong>ManaraTHON 2026</strong> is a marathon and fun run event of the <strong>City Government of Catbalogan</strong> as part of the <strong>Manaragat Festival 2026</strong>, with <strong>Waray-Waray Youth Advocates (WARAYA)</strong> as the main organizer.</li>
+      <li>The event aims to promote physical fitness, endurance, healthy lifestyles, and community spirit through a safe and well-organized running activity.</li>
+      <li>All participants must complete the online registration process and agree to the official event guidelines and waiver.</li>
+      <li>The event is open to both amateur and professional runners, subject to the availability of registration slots.</li>
+      <li>The Organizing Committee reserves the right to amend, modify, or supplement these guidelines as may be necessary to ensure the safety, integrity, and successful conduct of the event.</li>
+    </ol>
+  </div>
+
+  <!-- II. Registration and Participation -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-clipboard-list"></i> II. Registration and Participation</h2>
+    <ol class="numbered-list">
+      <li><strong>Online Registration.</strong> Registration shall open on <strong>June 23, 2026</strong>, and close on <strong>July 31, 2026, at 11:59 PM</strong>.</li>
+      <li><strong>Confirmation of Registration.</strong> Registered participants shall receive a confirmation notice through email or text message upon successful registration.</li>
+      <li><strong>Race Kit Claiming.</strong> Race kits may be claimed on <strong>August 13–14, 2026</strong>, at the <strong>City Administrator's Office, 2nd Floor, Catbalogan City Hall, Rizal Avenue, Barangay 04 Poblacion, Catbalogan City, Samar</strong>.
+        <ul class="letter-list">
+          <li>Participants claiming their own race kits must present a valid government-issued identification card.</li>
+          <li>Representatives claiming on behalf of a registered participant must present the following:
+            <ul class="letter-list" style="padding-left:1.5rem;">
+              <li>An authorization letter signed by the registered participant;</li>
+              <li>A photocopy or digital copy of the registered participant's valid ID; and</li>
+              <li>The representative's valid ID.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Each participant may register for only one (1) race category: <strong>5K, 10K, 21K, or 42K</strong>.</li>
+      <li>Registration fees are non-transferable and non-refundable and shall be based on the participant's selected race category.</li>
+    </ol>
+  </div>
+
+  <!-- III. Race Categories, Fees, and Schedule -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-flag-checkered"></i> III. Race Categories, Fees, and Schedule</h2>
+    <ol class="numbered-list">
+      <li>All participants must report to the designated assembly area at least <strong>thirty (30) minutes</strong> before their scheduled gun start.</li>
+      <li>Hydration stations shall be available at regular intervals throughout the race route.</li>
+      <li>Medical personnel and first-aid stations shall be strategically positioned along the route and at the start/finish area.</li>
+      <li>The <strong>21K Half Marathon</strong> and <strong>42K Full Marathon</strong> categories are recommended for experienced runners due to the longer distances and earlier start times.</li>
+    </ol>
+
+    <div class="table-wrap">
+      <table class="fee-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Distance</th>
+            <th>Registration Fee</th>
+            <th>Gun Start Time</th>
+            <th>Cut-off Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>5K Fun Run</td><td>5 km</td><td>₱800.00</td><td>5:00 AM</td><td>6:30 AM</td></tr>
+          <tr><td>10K Challenge</td><td>10 km</td><td>₱1,000.00</td><td>5:00 AM</td><td>7:30 AM</td></tr>
+          <tr><td>21K Half Marathon</td><td>21 km</td><td>₱1,200.00</td><td>4:00 AM</td><td>8:30 AM</td></tr>
+          <tr><td>42K Full Marathon</td><td>42 km</td><td>₱1,400.00</td><td>1:00 AM</td><td>9:00 AM</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:0.8rem; color:#7a5a4a; font-style:italic;">
+      Participants who fail to reach designated checkpoints or complete the race within the prescribed cut-off time may be removed from the course for safety reasons.
+    </p>
+  </div>
+
+  <!-- IV. Safety and Conduct -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-shield-alt"></i> IV. Safety and Conduct</h2>
+    <ol class="numbered-list">
+      <li>Participants must wear their official race bib prominently on the front of their shirt throughout the race.</li>
+      <li>The use of headphones or earphones while running is strongly discouraged to ensure situational awareness and participant safety.</li>
+      <li>Participants must remain within the designated race route and comply with all instructions issued by race marshals, event officials, and law enforcement personnel.</li>
+      <li>Any participant experiencing injury, illness, fatigue, or distress must immediately seek assistance from the nearest marshal or medical personnel.</li>
+      <li>Unsportsmanlike conduct, harassment, abusive behavior, use of offensive language, or any act that endangers other participants shall be grounds for immediate disqualification.</li>
+      <li>The use of prohibited or performance-enhancing substances is strictly prohibited and may result in disqualification and removal from the event.</li>
+    </ol>
+  </div>
+
+  <!-- V. Awards and Recognition -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-trophy"></i> V. Awards and Recognition</h2>
+    <ol class="numbered-list">
+      <li>The top three (3) male and female finishers in each race category shall receive medals, certificates, and cash prizes.</li>
+      <li>All participants who successfully complete their registered race category within the cut-off time shall receive a digital finisher's certificate and a medal.</li>
+      <li>Special awards may be presented in the following categories:
+        <div class="grid-3col" style="margin-top:0.5rem;">
+          <div class="info-badge"><i class="fas fa-tshirt"></i> Best in Outfit</div>
+          <div class="info-badge"><i class="fas fa-heart"></i> Best Couple Runner</div>
+          <div class="info-badge"><i class="fas fa-child"></i> Youngest Runner</div>
+          <div class="info-badge"><i class="fas fa-crown"></i> Oldest Runner</div>
+          <div class="info-badge"><i class="fas fa-users"></i> Best Group Delegation</div>
+        </div>
+      </li>
+    </ol>
+    <p style="margin-top:0.5rem; color:#7a5a4a; font-style:italic;">
+      The Organizing Committee reserves the right to establish additional award categories and criteria as deemed appropriate.
+    </p>
+  </div>
+
+  <!-- VI. Route and Hydration -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-road"></i> VI. Route and Hydration</h2>
+    <ol class="numbered-list">
+      <li>The official race routes shall be published through the official WARAYA website and social media platforms on or before <strong>August 1, 2026</strong>.</li>
+      <li>Water stations shall be located approximately every two (2) to three (3) kilometers along the race route.</li>
+      <li>Electrolyte drinks and energy-boosting food items shall be available at designated aid stations located at the 5 km, 10 km, 15 km, 20 km, 25 km, 30 km, and 35 km markers.</li>
+      <li>Participants are encouraged to bring personal hydration equipment, such as hydration belts or handheld bottles, for additional convenience.</li>
+    </ol>
+  </div>
+
+  <!-- VII. Medical and Emergency Protocols -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-ambulance"></i> VII. Medical and Emergency Protocols</h2>
+    <ol class="numbered-list">
+      <li>Medical teams and ambulances shall be on standby at the start/finish area and at designated locations along the race route.</li>
+      <li>Participants are required to disclose any pre-existing medical conditions during registration that may affect their participation in the event.</li>
+      <li>In the event of an emergency, participants should immediately notify the nearest race marshal or medical personnel.</li>
+      <li>Individuals who feel unwell, injured, or medically unfit prior to the race are strongly advised not to participate.</li>
+      <li>Authorized medical personnel shall have the authority to withdraw any participant from the race if continued participation poses a risk to the participant's health or safety.</li>
+    </ol>
+  </div>
+
+  <!-- VIII. Waiver and Liability -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-file-signature"></i> VIII. Waiver and Liability</h2>
+    <ol class="numbered-list">
+      <li>By registering for the event, participants acknowledge and accept all risks associated with marathon and road-running activities and agree to release and hold harmless the organizers, sponsors, partners, and volunteers from liability arising from injury, accident, illness, property damage, or loss of personal belongings.</li>
+      <li>All participants must accomplish and submit the required waiver, whether electronically or in printed form, prior to participation.</li>
+      <li>Participants below eighteen (18) years of age must secure the consent and signature of a parent or legal guardian on the waiver form.</li>
+    </ol>
+  </div>
+
+  <!-- IX. Race Rules and Timing -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-clock"></i> IX. Race Rules and Timing</h2>
+    <ol class="numbered-list">
+      <li><strong>Official Timing.</strong> Official race results shall be based on the timing system designated by the Organizing Committee.</li>
+      <li><strong>Bib Transfer Prohibited.</strong> Race bibs are non-transferable. Participants found running under another person's name or race bib shall be automatically disqualified.</li>
+      <li><strong>Unauthorized Participation.</strong> Individuals participating without official registration and race bibs ("bandit runners") shall not be entitled to race support, medals, certificates, prizes, insurance coverage, or other event benefits.</li>
+      <li><strong>Course Compliance.</strong> Participants must complete the entire designated route. Any runner found taking shortcuts or deviating from the official route shall be disqualified.</li>
+      <li><strong>Lost or Damaged Bibs.</strong> Lost, stolen, or damaged race bibs shall not be replaced unless approved by the Organizing Committee.</li>
+    </ol>
+  </div>
+
+  <!-- X. Baggage Deposit and Personal Belongings -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-luggage-cart"></i> X. Baggage Deposit and Personal Belongings</h2>
+    <ol class="numbered-list">
+      <li>A baggage deposit area may be provided at the event venue for the convenience of participants.</li>
+      <li>Participants are advised not to leave valuable items, cash, jewelry, gadgets, or important documents in deposited bags.</li>
+      <li>The Organizing Committee shall not be liable for any loss, theft, or damage to personal belongings before, during, or after the event.</li>
+    </ol>
+  </div>
+
+  <!-- XI. Photography, Videography, and Media Release -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-camera"></i> XI. Photography, Videography, and Media Release</h2>
+    <ol class="numbered-list">
+      <li>By participating in ManaraTHON 2026, participants grant the organizers the right to photograph, film, record, and use their image, likeness, voice, and race results for promotional, documentation, publicity, and other lawful purposes without further compensation.</li>
+      <li>Participants waive any claim for compensation arising from the use of photographs, videos, or other media materials captured during the event.</li>
+    </ol>
+  </div>
+
+  <!-- XII. Environmental Responsibility -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-leaf"></i> XII. Environmental Responsibility</h2>
+    <ol class="numbered-list">
+      <li>Participants are encouraged to help maintain the cleanliness of the race route and surrounding areas.</li>
+      <li>Waste shall be disposed of only in designated bins and collection points.</li>
+      <li>Littering along the race route may be considered a violation of race rules and may result in sanctions as determined by the Organizing Committee.</li>
+    </ol>
+  </div>
+
+  <!-- XIII. Final Provisions -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-gavel"></i> XIII. Final Provisions</h2>
+    <ol class="numbered-list">
+      <li>The Organizing Committee reserves the right to modify, interpret, or supplement these guidelines whenever necessary to ensure the safety, fairness, and successful conduct of the event.</li>
+      <li>Any amendments or announcements shall be communicated through the official WARAYA website and social media platforms.</li>
+      <li>In the event of severe weather conditions, natural calamities, public safety concerns, or other force majeure events, the race may be postponed, modified, suspended, or cancelled. Participants shall be notified through official channels as soon as practicable.</li>
+      <li>For inquiries and concerns, participants may contact the <strong>ManaraTHON Secretariat</strong> through email at <strong>warayaofficial04@gmail.com</strong> or leave a chat at the Official Page of WARAYA and the Run.</li>
+      <li>Participation in ManaraTHON 2026 constitutes acceptance of these guidelines and all rules, regulations, and instructions issued by the Organizing Committee.</li>
+    </ol>
+  </div>
+
+  <!-- XIV. Force Majeure -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-cloud-storm"></i> XIV. Force Majeure</h2>
+    <ol class="numbered-list">
+      <li>The Organizing Committee shall not be held liable for any cancellation, postponement, modification, or interruption of the event caused by acts of God, severe weather conditions, natural disasters, public emergencies, government directives, civil disturbances, pandemics, or other circumstances beyond its reasonable control.</li>
+      <li>In the event of cancellation due to force majeure, registration fees shall be governed by the policy to be announced by the Organizing Committee.</li>
+    </ol>
+  </div>
+
+  <!-- XV. Effectivity -->
+  <div class="guidelines-section">
+    <h2 class="section-title"><i class="fas fa-check-circle"></i> XV. Effectivity</h2>
+    <ol class="numbered-list">
+      <li>These Official Guidelines shall take effect immediately upon publication through the official channels of the City Government of Catbalogan and WARAYA.</li>
+      <li>All participants, volunteers, sponsors, partners, and event personnel are expected to comply with these Guidelines.</li>
+    </ol>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-note">
+    <p><i class="fas fa-running"></i> "Run with Purpose · Run with Pride" <i class="fas fa-running"></i></p>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem;">For questions, reach out to the ManaraTHON Secretariat at <strong>warayaofficial04@gmail.com</strong></p>
+  </div>
+</div>
+
+<script>
+  const PDF_URL = "";
+
+  document.getElementById('viewFullPdfBtn')?.addEventListener('click', () => window.open(PDF_URL, '_blank'));
+  document.getElementById('downloadPdfBtn')?.addEventListener('click', () => window.open(PDF_URL, '_blank'));
+</script>
+</body>
+</html>
