@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/logo.png">
-  <title>ManaRUNgat Staff Login</title>
+  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/Manaragat2026.png">
+  <title>ManaraTHON · Staff Login</title>
   <!-- Google Fonts + Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -17,7 +17,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(145deg, #fff6ed 0%, #ffdcc0 100%);
+      background: linear-gradient(145deg, #e6f4f9 0%, #b8d8e8 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -39,7 +39,7 @@
       opacity: 0.06;
       pointer-events: none;
       transform: rotate(-12deg);
-      color: #b45309;
+      color: #06b6d4;
     }
 
     body::after {
@@ -53,7 +53,7 @@
       opacity: 0.06;
       pointer-events: none;
       transform: rotate(15deg);
-      color: #b45309;
+      color: #06b6d4;
     }
 
     .login-container {
@@ -69,41 +69,62 @@
     }
 
     .glass-login {
-      background: rgba(255, 250, 245, 0.95);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(20px);
       border-radius: 64px;
       padding: 2.5rem 2.2rem;
-      box-shadow: 0 45px 65px rgba(180, 70, 0, 0.15), 0 0 0 1px rgba(255, 220, 180, 0.5);
+      box-shadow: 0 45px 65px rgba(0, 120, 140, 0.12), 0 0 0 1px rgba(192, 192, 192, 0.3);
       text-align: center;
       transition: transform 0.25s ease;
-      border: 1px solid rgba(255, 200, 160, 0.4);
+      border: 1px solid rgba(192, 192, 192, 0.3);
     }
 
     .glass-login:hover {
       transform: translateY(-5px);
     }
 
-    .logo-wrapper {
+    .logo-wrapper2 {
       display: flex;
       justify-content: center;
+      align-items: center;
+      gap: -1rem;
       margin-bottom: 0.5rem;
     }
 
-    .logo {
-      width: 80px;
-      height: auto;
-      filter: drop-shadow(0 8px 16px rgba(180, 70, 0, 0.12));
+    .logo-wrapper2 img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 8px 16px rgba(0, 120, 140, 0.10));
       transition: transform 0.2s;
     }
 
-    .logo:hover {
+    .logo-wrapper2 img:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: -8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo-wrapper img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 8px 16px rgba(0, 120, 140, 0.10));
+      transition: transform 0.2s;
+    }
+
+    .logo-wrapper img:hover {
       transform: scale(1.02);
     }
 
     h2 {
       font-size: 2rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #b45309, #f97316);
+      background: linear-gradient(135deg, #0e7490, #06b6d4);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -112,13 +133,13 @@
     }
 
     h2 i {
-      color: #f97316;
+      color: #06b6d4;
       margin-right: 6px;
     }
 
     .sport-badge {
       display: inline-block;
-      background: linear-gradient(95deg, #f97316, #c2410c);
+      background: linear-gradient(95deg, #0e7490, #06b6d4);
       padding: 0.2rem 1.2rem;
       border-radius: 60px;
       font-size: 0.75rem;
@@ -134,7 +155,7 @@
       gap: 8px;
       background: transparent;
       border: none;
-      color: #c2410c;
+      color: #0e7490;
       font-weight: 600;
       font-size: 0.85rem;
       cursor: pointer;
@@ -149,7 +170,7 @@
     }
 
     .back-link:hover {
-      background: rgba(249, 115, 22, 0.1);
+      background: rgba(6, 182, 212, 0.1);
       transform: translateX(-3px);
     }
 
@@ -158,7 +179,7 @@
       align-items: center;
       text-align: center;
       margin: 1.5rem 0;
-      color: #b07a5a;
+      color: #7a9aaa;
       font-size: 0.8rem;
     }
 
@@ -166,7 +187,7 @@
     .divider::after {
       content: '';
       flex: 1;
-      border-bottom: 1px solid #fadbc8;
+      border-bottom: 1px solid #c8dce4;
     }
 
     .divider::before { margin-right: 1rem; }
@@ -181,12 +202,12 @@
       font-weight: 600;
       display: block;
       margin-bottom: 8px;
-      color: #4a2a1a;
+      color: #2a4a5a;
       font-size: 0.9rem;
     }
 
     .input-group label i {
-      color: #f97316;
+      color: #06b6d4;
       margin-right: 6px;
     }
 
@@ -199,7 +220,7 @@
       width: 100%;
       padding: 15px 20px;
       border-radius: 60px;
-      border: 1.5px solid #fadbc8;
+      border: 1.5px solid #c8dce4;
       background: white;
       font-size: 1rem;
       font-family: 'Poppins', sans-serif;
@@ -209,8 +230,8 @@
     }
 
     .input-wrapper input:focus {
-      border-color: #f97316;
-      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+      border-color: #06b6d4;
+      box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15);
     }
 
     .toggle-password {
@@ -222,7 +243,7 @@
       border: none;
       font-weight: 600;
       font-size: 0.75rem;
-      color: #c2410c;
+      color: #0e7490;
       cursor: pointer;
       padding: 6px 12px;
       border-radius: 40px;
@@ -230,11 +251,11 @@
     }
 
     .toggle-password:hover {
-      background: #fff1e6;
+      background: #e6f4f9;
     }
 
     .login-btn {
-      background: linear-gradient(95deg, #c2410c, #f97316);
+      background: linear-gradient(95deg, #0e7490, #06b6d4);
       width: 100%;
       border: none;
       padding: 15px 20px;
@@ -245,7 +266,7 @@
       cursor: pointer;
       transition: all 0.25s;
       margin-top: 0.8rem;
-      box-shadow: 0 8px 18px rgba(200, 80, 0, 0.2);
+      box-shadow: 0 8px 18px rgba(0, 150, 180, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -253,9 +274,9 @@
     }
 
     .login-btn:hover:not(:disabled) {
-      background: linear-gradient(95deg, #9a3412, #ea580c);
+      background: linear-gradient(95deg, #0a5c72, #0891b2);
       transform: scale(1.01);
-      box-shadow: 0 12px 24px rgba(200, 80, 0, 0.3);
+      box-shadow: 0 12px 24px rgba(0, 150, 180, 0.3);
     }
 
     .login-btn:disabled {
@@ -265,16 +286,24 @@
 
     .google-btn {
       background: white;
-      border: 1.5px solid #fadbc8;
-      color: #4a2a1a;
+      border: 1.5px solid #c8dce4;
+      color: #2a4a5a;
       box-shadow: none;
     }
 
     .google-btn:hover:not(:disabled) {
-      background: #fff8f0;
-      border-color: #f97316;
+      background: #f8fcfe;
+      border-color: #06b6d4;
       transform: scale(1.01);
-      box-shadow: 0 8px 18px rgba(200, 80, 0, 0.08);
+      box-shadow: 0 8px 18px rgba(0, 150, 180, 0.08);
+    }
+
+    .google-btn .google-icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48cGF0aCBkPSJNMjAgMzBjMC0xMC41IDguNS0xOSAxOS0xOSA0LjUgMCA4LjUgMS41IDExLjUgNC41bDggLThjLTUgLTUgMTIuNS04IDIwLjUtOHMxOCA3IDE4IDE4YzAgMTAtNSAxNy0xMiAyMi0zIDMtNyA1LTEyIDUtMTAgMC0xNy01LTIzLTEwbC04IDhjNiA2IDEwIDE1IDUgMjUtMTUgMC0yMi0xMC0yMi0yMHoiIGZpbGw9IiM0Mjg1RjQiLz48L3N2Zz4=') no-repeat center;
+      background-size: contain;
     }
 
     .loading-spinner-small {
@@ -288,8 +317,8 @@
     }
 
     .dark-spinner {
-      border: 2.5px solid #fadbc8;
-      border-top-color: #f97316;
+      border: 2.5px solid #c8dce4;
+      border-top-color: #06b6d4;
     }
 
     @keyframes spin {
@@ -308,7 +337,7 @@
     }
 
     .toast-message {
-      background: #2a1a0ac9;
+      background: #1a3a4ac9;
       backdrop-filter: blur(12px);
       color: white;
       padding: 12px 24px;
@@ -328,13 +357,13 @@
     }
 
     .toast-message.error {
-      border-left-color: #f97316;
+      border-left-color: #ef4444;
       background: #7a1a1ad9;
     }
 
     .toast-message.success {
-      border-left-color: #f97316;
-      background: #7a3a0ad9;
+      border-left-color: #06b6d4;
+      background: #0a5c72d9;
     }
 
     @keyframes slideLeft {
@@ -374,7 +403,7 @@
       text-align: center;
       box-shadow: 0 40px 55px rgba(0, 0, 0, 0.3);
       animation: zoomModal 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      border: 1px solid #fadbc8;
+      border: 1px solid #c8dce4;
     }
 
     @keyframes zoomModal {
@@ -385,22 +414,22 @@
     .modal-card h3 {
       font-size: 1.8rem;
       font-weight: 800;
-      color: #b45309;
+      color: #0e7490;
       margin-bottom: 0.5rem;
     }
 
     .modal-card h3 i {
-      color: #f97316;
+      color: #06b6d4;
       margin-right: 8px;
     }
 
     .modal-card p {
       margin: 1rem 0;
-      color: #5a3a2a;
+      color: #4a6a7a;
     }
 
     .modal-btn {
-      background: linear-gradient(95deg, #c2410c, #f97316);
+      background: linear-gradient(95deg, #0e7490, #06b6d4);
       border: none;
       padding: 10px 28px;
       border-radius: 40px;
@@ -412,23 +441,25 @@
     }
 
     .modal-btn:hover {
-      background: linear-gradient(95deg, #9a3412, #ea580c);
+      background: linear-gradient(95deg, #0a5c72, #0891b2);
     }
 
     .sub-text {
       margin-top: 1.5rem;
       font-size: 0.75rem;
-      color: #b07a5a;
+      color: #7a9aaa;
     }
 
     .sub-text i {
-      color: #f97316;
+      color: #06b6d4;
       margin-right: 4px;
     }
 
     @media (max-width: 550px) {
       .glass-login { padding: 1.8rem; }
       h2 { font-size: 1.6rem; }
+      .logo-wrapper { flex-direction: column; gap: 0.3rem; }
+      .logo-wrapper img { height: 50px; }
     }
   </style>
 </head>
@@ -442,17 +473,17 @@
     </button>
 
     <div class="logo-wrapper">
-      <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo" class="logo">
+        <img src="https://wxyzofficial.sirv.com/MANARAGAT%20FESTIVAL/ManaraTHON2026.png" alt="Catbalogan City Official Seal">
     </div>
-    <h2><i class="fas fa-user-lock"></i> Staff Portal</h2>
-    <div class="sport-badge"><i class="fas fa-running" style="margin-right:6px;"></i> ManaRUNgat Committee</div>
-    <p style="margin: 0.6rem 0 0.2rem; color:#7a5a4a; font-size:0.9rem;">Authorized access only · Admin / Officers</p>
+    <h2>Organizer's Portal</h2>
+    <div class="sport-badge">MANARAGAT FESTIVAL 2026</div>
+    <p style="margin: 0.6rem 0 0.2rem; color:#5a7a8a; font-size:0.9rem;">Authorized access only · Admin / Officers</p>
 
     <!-- Email -->
     <div class="input-group">
       <label><i class="fas fa-envelope"></i> Email Address</label>
       <div class="input-wrapper">
-        <input type="email" id="loginEmail" placeholder="officer@waraya.org" autocomplete="email">
+        <input type="email" id="loginEmail" placeholder="admin@waraya.org" autocomplete="email">
       </div>
     </div>
 
@@ -466,19 +497,27 @@
     </div>
 
     <button class="login-btn" id="loginBtn">
-      <span><i class="fas fa-sign-in-alt"></i> Sign in with Email</span>
+      <span><i class="fa-solid fa-envelope"></i> Sign in with Email</span>
       <span id="loginLoader" style="display:none;" class="loading-spinner-small"></span>
     </button>
 
-    <div class="divider"><i class="fas fa-circle" style="font-size:0.3rem; color:#f97316;"></i> OR <i class="fas fa-circle" style="font-size:0.3rem; color:#f97316;"></i></div>
+    <div class="divider"><i class="fas fa-circle" style="font-size:0.3rem; color:#06b6d4;"></i> OR <i class="fas fa-circle" style="font-size:0.3rem; color:#06b6d4;"></i></div>
 
     <!-- Google Sign-In -->
     <button class="login-btn google-btn" id="googleSignInBtn">
-      <span><i class="fab fa-google"></i> Sign in with Google</span>
+      <span><span class="fa-brands fa-google"></span> Sign in with Google</span>
       <span id="googleLoader" style="display:none;" class="loading-spinner-small dark-spinner"></span>
     </button>
 
     <div class="sub-text"><i class="fas fa-shield-alt"></i> Secure authentication · WARAYA Youth Advocates</div>
+    <br>
+
+    <div class="logo-wrapper2">
+     <img src="https://wxyzofficial.sirv.com/MANARAGAT%20FESTIVAL/Catbalogan_City_Seal.png" alt="Catbalogan City Official Seal" />
+     <img src="https://wxyzofficial.sirv.com/MANARAGAT%20FESTIVAL/CAPTIVATING%20Catbalogan.png" alt="CAPTIVATING Catbalogan Official Logo" />
+     <img src="https://wxyzofficial.sirv.com/MANARAGAT%20FESTIVAL/captaving.png" alt="Tourism Logo" />
+     <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Official Logo" />
+    </div>
   </div>
 </div>
 
@@ -682,6 +721,7 @@
       console.log("Session check error:", err);
     }
   })();
+    // MADE AND DEVELOPED BY JOHN STEVEN A. MACAPAÑAS (EXECUTIVE ASSISTANT, WARAYA YOUTH ADVOCATES)
 </script>
 </body>
 </html>
