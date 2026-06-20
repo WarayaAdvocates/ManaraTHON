@@ -27,8 +27,8 @@
       border: 1px solid rgba(192,192,192,0.4);
       flex-wrap: wrap; gap: 1rem;
     }
-    .logo-area { display: flex; align-items: center; gap: -9rem; }
-    .logo-area img { height: 48px; width: auto; transition: transform 0.2s; }
+    .logo-area { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+    .logo-area img { height: 45px; width: auto; transition: transform 0.2s; object-fit: contain; }
     .logo-area img:hover { transform: scale(1.02); }
     .logo-area h1 {
       font-size: 1.5rem; font-weight: 800;
@@ -261,11 +261,123 @@
     }
     .size-chart-img:hover { transform: scale(1.01); }
 
+    /* Success Modal Buttons - Modern Design */
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .modal-btn {
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-btn-primary {
+      background: linear-gradient(135deg, #06b6d4, #0e7490);
+      color: white;
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.35);
+    }
+
+    .modal-btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+    }
+
+    .modal-btn-primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .modal-btn-primary i {
+      font-size: 1.1rem;
+    }
+
+    .modal-btn-secondary {
+      background: transparent;
+      color: #0e7490;
+      border: 2px solid #06b6d4;
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.1);
+    }
+
+    .modal-btn-secondary:hover {
+      background: rgba(6, 182, 212, 0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+    }
+
+    .modal-btn-secondary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .modal-btn-secondary i {
+      font-size: 1.1rem;
+      color: #0e7490;
+    }
+
+    /* Shimmer effect for primary button */
+    .modal-btn-primary::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.15) 50%,
+        transparent 60%
+      );
+      transform: rotate(45deg);
+      transition: 0.5s;
+    }
+
+    .modal-btn-primary:hover::after {
+      left: 100%;
+    }
+
+    .modal-btn-secondary::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(6, 182, 212, 0.05) 50%,
+        transparent 60%
+      );
+      transform: rotate(45deg);
+      transition: 0.5s;
+    }
+
+    .modal-btn-secondary:hover::after {
+      left: 100%;
+    }
+
     @media (max-width: 760px) {
       body { padding: 1rem; }
       .glass-card { padding: 1.5rem; }
       .top-nav { flex-direction: column; text-align: center; }
       .logo-area h1 { font-size: 1.2rem; }
+      .logo-area img { height: 35px; }
       .event-title h2 { font-size: 1.6rem; }
       .event-title .logo-partners { flex-direction: column; gap: 0.5rem; }
       .event-title .logo-partners img { height: 50px; }
@@ -279,6 +391,7 @@
       .modal-content { padding: 1rem; max-width: 95%; }
       .modal-close { font-size: 1.6rem; top: 6px; right: 10px; }
       .size-chart-img { max-width: 100%; }
+      .modal-btn { padding: 0.6rem 1.5rem; font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -303,7 +416,7 @@
   <div class="glass-card" id="registrationCard">
     <div class="event-title">
       <div class="logo-partners">
-        <img src="https://wxyzofficial.sirv.com/MANARAGAT%20FESTIVAL/ManaraTHON2026.png" alt="Catbalogan City Official Seal">
+        <img src="https://wxyzofficial.sirv.com/MANARAGAT%20FESTIVAL/ManaraTHON2026.png" alt="ManaraTHON 2026 Logo">
       </div>
     <h1><i class="fas fa-running" style="color:#06b6d4; margin-right:8px;"></i> ManaraTHON 2026</h1>
     <div class="subtitle">First Catbalogan City Manaragat Marathon and Fun Run</div>
@@ -511,12 +624,24 @@
 <!-- Success Modal -->
 <div id="successModal" class="modal-overlay" style="z-index: 2000;">
   <div class="modal-content">
-    <h3><i class="fas fa-check-circle" style="color:#06b6d4;"></i> Registration Successful!</h3>
-    <p>You are now officially registered for the ManaraTHON 2026 fun run.<br>See you at the starting line!</p>
-    <p style="font-size: 0.9rem; font-style: italic; color:#4a7a8a;"><i class="fas fa-heart" style="color:#06b6d4;"></i> Once a WARAYA, Always a WARAYA.</p>
+    <div style="text-align: center; width: 100%;">
+      <div style="font-size: 4rem; margin-bottom: 0.5rem;">
+        <i class="fas fa-check-circle" style="color: #06b6d4;"></i>
+      </div>
+      <h3 style="color: #0a5c72; font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">Registration Successful!</h3>
+      <p style="color: #4a6a7a; font-size: 1rem; margin-bottom: 0.5rem;">Your registration has been successfully submitted and is now under review.</p>
+      <p style="color: #5a7a8a; font-size: 0.9rem;">Please make sure that you uploaded the correct payment receipt and entered the correct reference number.</p>
+      <p style="font-size: 0.9rem; font-style: italic; color: #4a7a8a; margin-top: 1rem;">
+        <i class="fas fa-heart" style="color: #06b6d4;"></i> Run with Purpose · Run with Pride
+      </p>
+    </div>
     <div class="modal-buttons">
-      <button class="modal-btn" id="modalOkBtn" style="background:#06b6d4;"><i class="fas fa-thumbs-up"></i> Awesome!</button>
-      <button class="modal-btn modal-btn-outline" id="closeSuccessModalBtn" style="border-color:#06b6d4; color:#0e7490;"><i class="fas fa-times"></i> Close</button>
+      <button class="modal-btn modal-btn-primary" id="modalOkBtn">
+        <i class="fas fa-thumbs-up"></i> Awesome!
+      </button>
+      <button class="modal-btn modal-btn-secondary" id="closeSuccessModalBtn">
+        <i class="fas fa-times"></i> Close
+      </button>
     </div>
   </div>
 </div>
