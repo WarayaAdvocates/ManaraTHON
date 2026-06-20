@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/logo.png">
-  <title>ManaRUNgat · Admin Dashboard</title>
+  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/Manaragat2026.png">
+  <title>ManaraTHON · Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
@@ -16,14 +16,14 @@
     }
 
     body {
-      background: #f0f4fa;
+      background: linear-gradient(145deg, #e6f4f9 0%, #b8d8e8 100%);
       display: flex;
       min-height: 100vh;
     }
 
     .sidebar {
       width: 280px;
-      background: linear-gradient(175deg, #1a0e06 0%, #2d1a0a 100%);
+      background: linear-gradient(175deg, #0a5c72 0%, #0e7490 100%);
       backdrop-filter: blur(4px);
       color: white;
       position: fixed;
@@ -31,7 +31,7 @@
       transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       z-index: 110;
       padding: 2rem 1rem;
-      box-shadow: 8px 0 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 8px 0 30px rgba(0, 80, 100, 0.3);
       overflow-y: auto;
     }
 
@@ -42,26 +42,40 @@
     .sidebar .logo-area {
       text-align: center;
       margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .sidebar .logo-area img {
-      width: 70px;
+    .sidebar .logo-area .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
       margin-bottom: 0.5rem;
+    }
+
+    .sidebar .logo-area .logo-wrapper img {
+      height: 50px;
+      width: auto;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
     }
 
     .sidebar .logo-area h3 {
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       letter-spacing: -0.3px;
-      background: linear-gradient(135deg, #f97316, #fbbf24);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: #ffffff;
+      opacity: 0.9;
+    }
+
+    .sidebar .logo-area .subtitle {
+      font-size: 0.65rem;
+      opacity: 0.6;
+      font-weight: 300;
     }
 
     .sidebar nav {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
 
     .sidebar nav a {
@@ -69,19 +83,46 @@
       align-items: center;
       gap: 12px;
       padding: 12px 20px;
-      margin: 6px 0;
+      margin: 4px 0;
       border-radius: 50px;
-      color: #e2e8f0;
+      color: rgba(255,255,255,0.8);
       text-decoration: none;
       font-weight: 500;
       transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .sidebar nav a i {
+      width: 20px;
+      text-align: center;
+      font-size: 1rem;
     }
 
     .sidebar nav a:hover, .sidebar nav a.active {
-      background: rgba(249, 115, 22, 0.85);
+      background: rgba(255,255,255,0.15);
       color: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateX(3px);
+    }
+
+    .sidebar nav a.active {
+      background: rgba(255,255,255,0.2);
+      border-left: 3px solid #7dd3fc;
+    }
+
+    .sidebar nav .logout-link {
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1rem;
+    }
+
+    .sidebar nav .logout-link a {
+      color: rgba(255,200,200,0.7);
+    }
+
+    .sidebar nav .logout-link a:hover {
+      color: #fca5a5;
+      background: rgba(255,0,0,0.1);
     }
 
     .main-content {
@@ -96,13 +137,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
       padding: 0.8rem 2rem;
       border-radius: 60px;
       margin-bottom: 2rem;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 6px 18px rgba(0, 120, 140, 0.08);
+      border: 1px solid rgba(192,192,192,0.3);
     }
 
     .hamburger {
@@ -111,7 +152,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: #c2410c;
+      color: #0e7490;
       font-weight: bold;
     }
 
@@ -122,7 +163,7 @@
     }
 
     .role-badge {
-      background: linear-gradient(95deg, #c2410c, #f97316);
+      background: linear-gradient(95deg, #0e7490, #06b6d4);
       padding: 6px 16px;
       border-radius: 40px;
       font-size: 0.75rem;
@@ -133,8 +174,8 @@
 
     .datetime {
       font-weight: 500;
-      color: #7a3a0a;
-      background: #fff1e6;
+      color: #4a6a7a;
+      background: #e6f4f9;
       padding: 5px 14px;
       border-radius: 40px;
       font-size: 0.8rem;
@@ -148,45 +189,67 @@
     }
 
     .widget-card {
-      background: white;
+      background: rgba(255,255,255,0.92);
       padding: 1.5rem;
       border-radius: 32px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 20px rgba(0, 120, 140, 0.06);
       transition: all 0.25s;
-      border: 1px solid rgba(0,0,0,0.02);
+      border: 1px solid rgba(192,192,192,0.2);
+      backdrop-filter: blur(4px);
     }
 
     .widget-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 20px 30px -12px rgba(0, 120, 140, 0.15);
+      border-color: rgba(6,182,212,0.3);
     }
 
     .widget-card h4 {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #7a5a4a;
+      color: #5a7a8a;
       margin-bottom: 0.5rem;
     }
 
     .widget-number {
       font-size: 2.5rem;
       font-weight: 800;
-      color: #4a2a1a;
+      color: #0a5c72;
     }
 
     .widget-number .trend {
       font-size: 1rem;
       font-weight: 500;
-      color: #7a5a4a;
+      color: #5a7a8a;
     }
 
     .registrations-panel, .distance-panel, .medical-panel, .payment-panel {
-      background: white;
+      background: rgba(255,255,255,0.92);
       border-radius: 32px;
       padding: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 8px 20px rgba(0, 120, 140, 0.04);
       margin-bottom: 2rem;
+      border: 1px solid rgba(192,192,192,0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .panel-header h3 {
+      color: #0a5c72;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .panel-header h3 i {
+      color: #06b6d4;
+      margin-right: 8px;
     }
 
     .filter-bar {
@@ -207,23 +270,24 @@
     .filter-group label {
       font-size: 0.7rem;
       font-weight: 600;
-      color: #7a5a4a;
+      color: #5a7a8a;
       letter-spacing: 0.5px;
     }
 
     .filter-bar input, .filter-bar select {
       padding: 10px 14px;
       border-radius: 40px;
-      border: 1px solid #fadbc8;
+      border: 1px solid #c8dce4;
       background: white;
       font-size: 0.85rem;
       outline: none;
       width: 100%;
+      transition: all 0.2s;
     }
 
     .filter-bar input:focus, .filter-bar select:focus {
-      border-color: #f97316;
-      box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
+      border-color: #06b6d4;
+      box-shadow: 0 0 0 3px rgba(6,182,212,0.1);
     }
 
     .filter-actions {
@@ -234,7 +298,7 @@
     }
 
     .filter-bar button {
-      background: linear-gradient(95deg, #c2410c, #f97316);
+      background: linear-gradient(95deg, #0e7490, #06b6d4);
       border: none;
       padding: 10px 20px;
       border-radius: 40px;
@@ -245,24 +309,25 @@
     }
 
     .filter-bar button:hover {
-      background: linear-gradient(95deg, #9a3412, #ea580c);
+      background: linear-gradient(95deg, #0a5c72, #0891b2);
       transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,150,180,0.2);
     }
 
     .clear-filters-btn {
-      background: #7a5a4a;
+      background: #7a9aaa;
     }
 
     .clear-filters-btn:hover {
-      background: #4a2a1a;
+      background: #5a7a8a !important;
     }
 
     .export-btn {
-      background: #b45309;
+      background: #0a5c72;
     }
 
     .export-btn:hover {
-      background: #7a2e0a;
+      background: #084a5c !important;
     }
 
     .table-wrapper {
@@ -278,14 +343,18 @@
     th, td {
       padding: 14px 10px;
       text-align: left;
-      border-bottom: 1px solid #fadbc8;
+      border-bottom: 1px solid #c8dce4;
       font-size: 0.85rem;
     }
 
     th {
-      background: #fff8f0;
+      background: #e6f4f9;
       font-weight: 700;
-      color: #7a3a0a;
+      color: #0a5c72;
+    }
+
+    tr:hover td {
+      background: #f0f8fc;
     }
 
     .action-btn {
@@ -298,6 +367,9 @@
       font-weight: 500;
       font-size: 0.7rem;
       transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .delete-btn {
@@ -310,12 +382,12 @@
     }
 
     .view-btn {
-      background: #e0f0ff;
-      color: #1e6fdf;
+      background: #dbeafe;
+      color: #1e40af;
     }
 
     .view-btn:hover {
-      background: #d0e6ff;
+      background: #bfdbfe;
     }
 
     .paid-btn {
@@ -370,8 +442,8 @@
       border-radius: 20px;
       font-size: 0.7rem;
       font-weight: 700;
-      background: #fef3c7;
-      color: #92400e;
+      background: #dbeafe;
+      color: #1e40af;
     }
 
     .medical-badge {
@@ -420,7 +492,7 @@
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-bottom: 1.5rem;
-      border-bottom: 1px solid #fadbc8;
+      border-bottom: 1px solid #c8dce4;
       padding-bottom: 0.5rem;
     }
 
@@ -432,16 +504,17 @@
       cursor: pointer;
       font-weight: 500;
       transition: all 0.2s;
-      color: #7a5a4a;
+      color: #5a7a8a;
     }
 
     .distance-tab.active {
-      background: #f97316;
+      background: #06b6d4;
       color: white;
+      box-shadow: 0 4px 12px rgba(6,182,212,0.3);
     }
 
     .distance-tab:hover {
-      background: #fadbc8;
+      background: #c8dce4;
     }
 
     .distance-cards {
@@ -455,23 +528,24 @@
       background: #f8fafc;
       border-radius: 24px;
       padding: 1.2rem;
-      border-top: 6px solid #f97316;
+      border-top: 6px solid #06b6d4;
       transition: transform 0.2s;
     }
 
     .distance-card:hover {
       transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,120,140,0.08);
     }
 
     .distance-card h4 {
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
-      color: #4a2a1a;
+      color: #0a5c72;
     }
 
     .distance-card .member-count {
       font-size: 0.7rem;
-      color: #7a5a4a;
+      color: #5a7a8a;
       margin-bottom: 0.8rem;
     }
 
@@ -483,7 +557,7 @@
 
     .distance-card li {
       padding: 6px 0;
-      border-bottom: 1px solid #fadbc8;
+      border-bottom: 1px solid #c8dce4;
       font-size: 0.8rem;
       display: flex;
       justify-content: space-between;
@@ -498,10 +572,11 @@
     }
 
     .chart-card {
-      background: white;
+      background: rgba(255,255,255,0.92);
       border-radius: 32px;
       padding: 1.2rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+      box-shadow: 0 6px 16px rgba(0,120,140,0.05);
+      border: 1px solid rgba(192,192,192,0.2);
     }
 
     .modal-overlay {
@@ -543,7 +618,7 @@
       max-width: 100%;
       max-height: 400px;
       border-radius: 16px;
-      border: 1px solid #fadbc8;
+      border: 1px solid #c8dce4;
       margin: 1rem 0;
       object-fit: contain;
       background: #f8fafc;
@@ -554,8 +629,8 @@
       text-align: center;
       background: #f8fafc;
       border-radius: 16px;
-      color: #7a5a4a;
-      border: 1px dashed #fadbc8;
+      color: #5a7a8a;
+      border: 1px dashed #c8dce4;
     }
 
     .toast-notify {
@@ -563,12 +638,17 @@
       bottom: 25px;
       right: 25px;
       z-index: 1200;
-      background: #1f2937;
+      background: #0a5c72;
       color: white;
       padding: 12px 24px;
       border-radius: 60px;
       font-weight: 500;
       animation: fadeSlide 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .toast-notify.error {
+      background: #7a1a1a;
     }
 
     @keyframes fadeSlide {
@@ -610,20 +690,25 @@
       .filter-actions {
         flex-direction: column;
       }
+      .panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
     }
 
     .empty-state {
       text-align: center;
       padding: 3rem;
-      color: #b07a5a;
+      color: #7a9aaa;
     }
 
     .filter-stats {
       font-size: 0.75rem;
-      color: #c2410c;
+      color: #0e7490;
       margin-top: 8px;
       padding: 4px 12px;
-      background: #fff1e6;
+      background: #e6f4f9;
       border-radius: 20px;
       display: inline-block;
     }
@@ -658,11 +743,97 @@
       padding: 0.5rem 1rem;
       border-radius: 20px;
       font-size: 0.8rem;
-      border: 1px solid #fadbc8;
+      border: 1px solid #c8dce4;
     }
 
     .payment-stat strong {
-      color: #4a2a1a;
+      color: #0a5c72;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #e6f4f9;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #06b6d4;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0e7490;
+    }
+
+    /* Delete Confirmation Modal */
+    .confirm-modal-content {
+      text-align: center;
+    }
+
+    .confirm-modal-content .icon {
+      font-size: 3.5rem;
+      color: #ef4444;
+      margin-bottom: 0.5rem;
+    }
+
+    .confirm-modal-content h3 {
+      color: #0a5c72;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .confirm-modal-content p {
+      color: #5a7a8a;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .confirm-modal-content .btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .confirm-modal-content .btn-group button {
+      padding: 10px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .confirm-modal-content .btn-cancel {
+      background: #e2e8f0;
+      color: #4a6a7a;
+    }
+
+    .confirm-modal-content .btn-cancel:hover {
+      background: #c8dce4;
+      transform: translateY(-2px);
+    }
+
+    .confirm-modal-content .btn-confirm {
+      background: #ef4444;
+      color: white;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    }
+
+    .confirm-modal-content .btn-confirm:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
     }
   </style>
 </head>
@@ -671,25 +842,29 @@
 <div class="sidebar" id="sidebar">
   <button class="close-sidebar" id="closeSidebarBtn">✕</button>
   <div class="logo-area">
-      <img src="https://wxyzofficial.sirv.com/WARAYA/Catbalogan-City.png" alt="Catbalogan City Official Seal" />
-      <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo" />
-    <h1>ManaraTHON 2026</h1>
+    <div class="logo-wrapper">
+      <img src="https://wxyzofficial.sirv.com/WARAYA/Manaragat2026.png" alt="MANARAGAT FESTIVAL 2026 OFFICIAL LOGO" />
+    </div>
+    <h3>ManaraTHON 2026</h3>
+    <div class="subtitle">Organizer's Dashboard</div>
   </div>
   <nav>
-    <a href="#" data-section="dashboard" class="active">📊 Dashboard</a>
-    <a href="#" data-section="payments">💳 Payment Verification</a>
-    <a href="#" data-section="distances">🏃 Distance Groups</a>
-    <a href="#" data-section="medicalConditions">🩺 Medical Conditions</a>
-    <a href="#" data-section="statistics">📈 Statistics</a>
-    <a href="#" id="logoutBtn">🚪 Logout</a>
+    <a href="#" data-section="dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a>
+    <a href="#" data-section="payments"><i class="fas fa-credit-card"></i> Payment Verification</a>
+    <a href="#" data-section="distances"><i class="fas fa-running"></i> Distance Groups</a>
+    <a href="#" data-section="medicalConditions"><i class="fas fa-heartbeat"></i> Medical Conditions</a>
+    <a href="#" data-section="statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
+    <div class="logout-link">
+      <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
   </nav>
 </div>
 
 <div class="main-content">
   <div class="top-bar">
-    <button class="hamburger" id="hamburgerBtn">☰</button>
+    <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
     <div class="user-info">
-      <span class="role-badge" id="roleBadge">Admin</span>
+      <span class="role-badge" id="roleBadge"><i class="fas fa-user-shield"></i> MANARAGAT FESTIVAL 2026</span>
       <span class="datetime" id="datetime"></span>
     </div>
   </div>
@@ -698,21 +873,23 @@
   <div id="dashboardSection">
     <div class="widgets-grid" id="widgetsContainer">
       <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">—</div></div>
-      <div class="widget-card"><h4>Paid</h4><div class="widget-number">—</div></div>
-      <div class="widget-card"><h4>Unpaid</h4><div class="widget-number">—</div></div>
-      <div class="widget-card"><h4>🔥 Most Popular Distance</h4><div class="widget-number">—</div></div>
+      <div class="widget-card"><h4><i class="fas fa-check-circle" style="color:#22c55e;"></i> Paid</h4><div class="widget-number">—</div></div>
+      <div class="widget-card"><h4><i class="fas fa-clock" style="color:#f59e0b;"></i> Under Review</h4><div class="widget-number">—</div></div>
     </div>
     <div class="registrations-panel">
-      <h3 style="margin-bottom: 1rem;">📌 Registrations Management</h3>
+      <div class="panel-header">
+        <h3><i class="fas fa-list-ul"></i> Registrations Management</h3>
+        <span style="font-size:0.75rem; color:#5a7a8a;">Manage all registrations</span>
+      </div>
       
       <div class="filter-bar">
         <div class="filter-group">
-          <label>🔍 Search Name</label>
+          <label><i class="fas fa-search"></i> Search Name</label>
           <input type="text" id="searchNameInput" placeholder="Full name...">
         </div>
         
         <div class="filter-group">
-          <label>🏆 Age Range</label>
+          <label><i class="fas fa-calendar-alt"></i> Age Range</label>
           <select id="ageFilterSelect">
             <option value="all">All Ages</option>
             <option value="below30">Below 30 (16-29)</option>
@@ -722,27 +899,28 @@
         </div>
         
         <div class="filter-group">
-          <label>🎯 Distance</label>
+          <label><i class="fas fa-route"></i> Distance</label>
           <select id="distanceFilterSelect">
             <option value="">All Distances</option>
-            <option value="3K">3K</option>
             <option value="5K">5K</option>
             <option value="10K">10K</option>
+            <option value="21K">21K</option>
+            <option value="42K">42K</option>
           </select>
         </div>
 
         <div class="filter-group">
-          <label>💳 Payment Status</label>
+          <label><i class="fas fa-credit-card"></i> Payment Status</label>
           <select id="paymentFilterSelect">
             <option value="all">All</option>
             <option value="paid">Paid</option>
-            <option value="unpaid">Unpaid</option>
+            <option value="unpaid">Under Review</option>
           </select>
         </div>
         
         <div class="filter-actions">
-          <button id="clearFiltersBtn" class="clear-filters-btn">🗑️ Clear Filters</button>
-          <button id="exportCsvBtn" class="export-btn">📎 Export CSV</button>
+          <button id="clearFiltersBtn" class="clear-filters-btn"><i class="fas fa-undo"></i> Clear</button>
+          <button id="exportCsvBtn" class="export-btn"><i class="fas fa-file-csv"></i> Export CSV</button>
         </div>
       </div>
       
@@ -753,7 +931,7 @@
           <thead>
             <tr><th>Full Name</th><th>Age</th><th>Gender</th><th>Distance</th><th>Shirt</th><th>Contact</th><th>Payment</th><th>Receipt</th><th>Actions</th></tr>
           </thead>
-          <tbody id="tableBody"><tr><td colspan="9" class="empty-state">Loading registrations...</td></tr>
+          <tbody id="tableBody"><tr><td colspan="9" class="empty-state"><i class="fas fa-spinner fa-spin" style="font-size:1.5rem; display:block; margin-bottom:0.5rem;"></i> Loading registrations...</td></tr>
           </tbody>
         </table>
       </div>
@@ -763,51 +941,48 @@
   <!-- PAYMENT VERIFICATION SECTION -->
   <div id="paymentsSection" style="display: none;">
     <div class="payment-panel">
-      <h3 style="margin-bottom: 0.5rem;">💳 Payment Verification</h3>
-      <p style="margin-bottom: 1rem; color: #7a5a4a;">Review payment receipts and mark registrants as paid. Click on "View Receipt" to see the uploaded proof of payment.</p>
-      
-      <div class="payment-summary" id="paymentSummary">
-        <!-- populated by JS -->
+      <div class="panel-header">
+        <h3><i class="fas fa-credit-card"></i> Payment Verification</h3>
+        <span style="font-size:0.75rem; color:#5a7a8a;">Verify and manage payments</span>
       </div>
+      <p style="margin-bottom: 1rem; color: #5a7a8a; font-size:0.9rem;">Review payment receipts and mark registrants as paid. Click on "View Receipt" to see the uploaded proof of payment.</p>
+      
+      <div class="payment-summary" id="paymentSummary"></div>
       
       <div class="filter-bar">
         <div class="filter-group">
-          <label>🔍 Search Name</label>
+          <label><i class="fas fa-search"></i> Search Name</label>
           <input type="text" id="paymentSearchInput" placeholder="Search by name...">
         </div>
         <div class="filter-group">
-          <label>💳 Payment Status</label>
+          <label><i class="fas fa-credit-card"></i> Payment Status</label>
           <select id="paymentStatusFilter">
             <option value="all">All</option>
             <option value="paid">Paid</option>
-            <option value="unpaid">Unpaid</option>
+            <option value="unpaid">Under Review</option>
           </select>
         </div>
         <div class="filter-actions">
-          <button id="clearPaymentFiltersBtn" class="clear-filters-btn">🗑️ Clear</button>
+          <button id="clearPaymentFiltersBtn" class="clear-filters-btn"><i class="fas fa-undo"></i> Clear</button>
         </div>
       </div>
       
       <div id="paymentStats" class="filter-stats"></div>
       
-      <div id="paymentListContainer" style="margin-top: 1.5rem;">
-        <!-- Payment list populated by JS -->
-      </div>
+      <div id="paymentListContainer" style="margin-top: 1.5rem;"></div>
     </div>
   </div>
 
-  <!-- DISTANCE GROUPS SECTION (replaces Team Assignment) -->
+  <!-- DISTANCE GROUPS SECTION -->
   <div id="distancesSection" style="display: none;">
     <div class="distance-panel">
-      <h3 style="margin-bottom: 0.5rem;">🏃 Distance Groups</h3>
-      <p style="margin-bottom: 1rem; color: #7a5a4a;">View all participants grouped by their chosen run distance.</p>
-      
-      <div class="distance-tabs" id="distanceTabs">
-        <button class="distance-tab active" data-distance="all">🏆 All Participants</button>
-        <button class="distance-tab" data-distance="3K">3K</button>
-        <button class="distance-tab" data-distance="5K">5K</button>
-        <button class="distance-tab" data-distance="10K">10K</button>
+      <div class="panel-header">
+        <h3><i class="fas fa-running"></i> Distance Groups</h3>
+        <span style="font-size:0.75rem; color:#5a7a8a;">View participants by distance</span>
       </div>
+      <p style="margin-bottom: 1rem; color: #5a7a8a; font-size:0.9rem;">View all participants grouped by their chosen run distance.</p>
+      
+      <div class="distance-tabs" id="distanceTabs"></div>
       
       <div class="distance-cards" id="distanceCardsContainer"></div>
     </div>
@@ -816,26 +991,30 @@
   <!-- MEDICAL CONDITIONS SECTION -->
   <div id="medicalConditionsSection" style="display: none;">
     <div class="medical-panel">
-      <h3 style="margin-bottom: 0.5rem;">🩺 Participants with Medical Conditions</h3>
-      <p style="margin-bottom: 1rem; color: #7a5a4a;">List of all registrants who have declared medical conditions. Please ensure proper accommodations.</p>
+      <div class="panel-header">
+        <h3><i class="fas fa-heartbeat"></i> Medical Conditions</h3>
+        <span style="font-size:0.75rem; color:#5a7a8a;">Participants with medical conditions</span>
+      </div>
+      <p style="margin-bottom: 1rem; color: #5a7a8a; font-size:0.9rem;">List of all registrants who have declared medical conditions. Please ensure proper accommodations.</p>
       
       <div class="filter-bar">
         <div class="filter-group">
-          <label>🔍 Search Name</label>
+          <label><i class="fas fa-search"></i> Search Name</label>
           <input type="text" id="medicalSearchInput" placeholder="Search by name...">
         </div>
         <div class="filter-group">
-          <label>🎯 Filter by Distance</label>
+          <label><i class="fas fa-route"></i> Filter by Distance</label>
           <select id="medicalDistanceFilter">
             <option value="all">All Distances</option>
-            <option value="3K">3K</option>
             <option value="5K">5K</option>
             <option value="10K">10K</option>
+            <option value="21K">21K</option>
+            <option value="42K">42K</option>
           </select>
         </div>
         <div class="filter-actions">
-          <button id="clearMedicalFiltersBtn" class="clear-filters-btn">🗑️ Clear Filters</button>
-          <button id="exportMedicalCsvBtn" class="export-btn">📎 Export Medical List</button>
+          <button id="clearMedicalFiltersBtn" class="clear-filters-btn"><i class="fas fa-undo"></i> Clear</button>
+          <button id="exportMedicalCsvBtn" class="export-btn"><i class="fas fa-file-csv"></i> Export</button>
         </div>
       </div>
       
@@ -848,15 +1027,29 @@
   <!-- STATISTICS SECTION -->
   <div id="statisticsSection" style="display: none;">
     <div class="stats-container">
-      <div class="chart-card"><canvas id="genderChart"></canvas></div>
-      <div class="chart-card"><canvas id="distanceChart"></canvas></div>
-      <div class="chart-card"><canvas id="shirtChart"></canvas></div>
+      <div class="chart-card"><h4 style="margin-bottom:0.8rem; color:#0a5c72; font-size:0.9rem;"><i class="fas fa-venus-mars"></i> Gender Distribution</h4><canvas id="genderChart"></canvas></div>
+      <div class="chart-card"><h4 style="margin-bottom:0.8rem; color:#0a5c72; font-size:0.9rem;"><i class="fas fa-route"></i> Distance Popularity</h4><canvas id="distanceChart"></canvas></div>
+      <div class="chart-card"><h4 style="margin-bottom:0.8rem; color:#0a5c72; font-size:0.9rem;"><i class="fas fa-tshirt"></i> Shirt Size Distribution</h4><canvas id="shirtChart"></canvas></div>
     </div>
   </div>
 </div>
 
+<!-- Detail Modal -->
 <div id="detailModal" class="modal-overlay">
   <div class="modal-container" id="modalContent"></div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteConfirmModal" class="modal-overlay">
+  <div class="modal-container confirm-modal-content">
+    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+    <h3>Delete Registration</h3>
+    <p>Are you sure you want to permanently delete this registration? This action cannot be undone.</p>
+    <div class="btn-group">
+      <button class="btn-cancel" id="cancelDeleteBtn"><i class="fas fa-times"></i> Cancel</button>
+      <button class="btn-confirm" id="confirmDeleteBtn"><i class="fas fa-trash"></i> Delete</button>
+    </div>
+  </div>
 </div>
 
 <script type="module">
@@ -881,6 +1074,7 @@
   let allRegistrations = [];
   let charts = { gender: null, distance: null, shirt: null };
   let currentDistanceFilter = "all";
+  let pendingDeleteId = null;
 
   const DOM = {
     dashboardSection: document.getElementById('dashboardSection'),
@@ -912,13 +1106,15 @@
     clearPaymentFiltersBtn: document.getElementById('clearPaymentFiltersBtn'),
     paymentStats: document.getElementById('paymentStats'),
     paymentListContainer: document.getElementById('paymentListContainer'),
-    paymentSummary: document.getElementById('paymentSummary')
+    paymentSummary: document.getElementById('paymentSummary'),
+    deleteConfirmModal: document.getElementById('deleteConfirmModal'),
+    confirmDeleteBtn: document.getElementById('confirmDeleteBtn'),
+    cancelDeleteBtn: document.getElementById('cancelDeleteBtn')
   };
 
   function showToast(message, isError = false) {
     const toast = document.createElement('div');
-    toast.className = 'toast-notify';
-    toast.style.background = isError ? '#7a1a1a' : '#7a3a0a';
+    toast.className = 'toast-notify' + (isError ? ' error' : '');
     toast.innerText = message;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
@@ -930,16 +1126,50 @@
 
   function getPaymentStatusBadge(reg) {
     return isPaid(reg) 
-      ? '<span class="payment-status status-paid">✅ Paid</span>'
-      : '<span class="payment-status status-unpaid">⏳ Unpaid</span>';
+      ? '<span class="payment-status status-paid"><i class="fas fa-check-circle"></i> Paid</span>'
+      : '<span class="payment-status status-unpaid"><i class="fas fa-clock"></i> Under Review</span>';
   }
 
   function getReceiptButton(reg) {
     if (reg.receiptImageBase64) {
-      return `<button class="action-btn receipt-btn" data-id="${reg.id}">📄 View Receipt</button>`;
+      return `<button class="action-btn receipt-btn" data-id="${reg.id}"><i class="fas fa-file-image"></i> View</button>`;
     }
     return '<span style="color: #9ca3af; font-size:0.7rem;">No receipt</span>';
   }
+
+  // Delete Confirmation Functions
+  function showDeleteConfirm(id) {
+    pendingDeleteId = id;
+    DOM.deleteConfirmModal.classList.add('active');
+  }
+
+  function hideDeleteConfirm() {
+    DOM.deleteConfirmModal.classList.remove('active');
+    pendingDeleteId = null;
+  }
+
+  DOM.cancelDeleteBtn.addEventListener('click', hideDeleteConfirm);
+  DOM.deleteConfirmModal.addEventListener('click', function(e) {
+    if (e.target === this) hideDeleteConfirm();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') hideDeleteConfirm();
+  });
+
+  DOM.confirmDeleteBtn.addEventListener('click', async function() {
+    if (pendingDeleteId) {
+      try {
+        await deleteDoc(doc(db, "manarathon_registrations", pendingDeleteId));
+        showToast('Registration deleted successfully');
+        hideDeleteConfirm();
+        await fetchRegistrations();
+      } catch (error) {
+        console.error("Delete error:", error);
+        showToast('Failed to delete registration', true);
+        hideDeleteConfirm();
+      }
+    }
+  });
 
   // Payment Verification - Render
   function renderPaymentList() {
@@ -953,7 +1183,7 @@
     }
     if (statusFilter === 'paid') {
       participants = participants.filter(p => isPaid(p));
-    } else if (statusFilter === 'unpaid') {
+    } else if (statusFilter === 'under review') {
       participants = participants.filter(p => !isPaid(p));
     }
     
@@ -962,14 +1192,14 @@
     
     DOM.paymentSummary.innerHTML = `
       <div class="payment-stat"><strong>Total:</strong> ${allRegistrations.length}</div>
-      <div class="payment-stat"><strong>✅ Paid:</strong> ${totalPaid}</div>
-      <div class="payment-stat"><strong>⏳ Unpaid:</strong> ${totalUnpaid}</div>
+      <div class="payment-stat" style="background:#dcfce7; border-color:#86efac;"><strong>✅ Paid:</strong> ${totalPaid}</div>
+      <div class="payment-stat" style="background:#fee2e2; border-color:#fca5a5;"><strong>⏳ Under Review:</strong> ${totalUnpaid}</div>
     `;
     
-    DOM.paymentStats.innerHTML = `📊 Showing ${participants.length} registrant(s)`;
+    DOM.paymentStats.innerHTML = `<i class="fas fa-users"></i> Showing ${participants.length} registrant(s)`;
     
     if (participants.length === 0) {
-      DOM.paymentListContainer.innerHTML = '<div class="empty-state">✨ No registrations found</div>';
+      DOM.paymentListContainer.innerHTML = '<div class="empty-state"><i class="fas fa-check-circle" style="font-size:2rem; display:block; margin-bottom:0.5rem; color:#22c55e;"></i> No registrations found</div>';
       return;
     }
     
@@ -977,17 +1207,16 @@
     participants.forEach(p => {
       const hasReceipt = p.receiptImageBase64 ? true : false;
       html += `
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1rem; background: #f8fafc; border-radius: 20px; border: 1px solid #fadbc8; flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1rem; background: #f8fafc; border-radius: 20px; border: 1px solid #c8dce4; flex-wrap: wrap; gap: 0.5rem;">
           <div>
             <strong>${escapeHtml(p.fullName || '')}</strong>
-            <span style="font-size:0.8rem; color:#7a5a4a; margin-left:8px;">${p.distance || 'N/A'} · ${p.age || '?'}yo</span>
+            <span style="font-size:0.8rem; color:#5a7a8a; margin-left:8px;">${p.distance || 'N/A'} · ${p.age || '?'}yo</span>
           </div>
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             <span>${getPaymentStatusBadge(p)}</span>
-            ${hasReceipt ? `<button class="action-btn receipt-btn" data-id="${p.id}">📄 View Receipt</button>` : '<span style="color:#9ca3af; font-size:0.7rem;">No receipt</span>'}
-            ${!isPaid(p) ? `<button class="action-btn paid-btn mark-paid-btn" data-id="${p.id}">✅ Mark Paid</button>` : ''}
-            ${isPaid(p) ? `<button class="action-btn unpaid-btn mark-unpaid-btn" data-id="${p.id}">↩️ Mark Unpaid</button>` : ''}
-            <button class="action-btn view-btn" data-id="${p.id}">👁️ View</button>
+            ${hasReceipt ? `<button class="action-btn receipt-btn" data-id="${p.id}"><i class="fas fa-file-image"></i> Receipt</button>` : '<span style="color:#9ca3af; font-size:0.7rem;">No receipt</span>'}
+            ${!isPaid(p) ? `<button class="action-btn paid-btn mark-paid-btn" data-id="${p.id}"><i class="fas fa-check"></i> Mark Paid</button>` : ''}
+            ${isPaid(p) ? `<button class="action-btn unpaid-btn mark-unpaid-btn" data-id="${p.id}"><i class="fas fa-undo"></i> Mark Under Review</button>` : ''}
           </div>
         </div>
       `;
@@ -1021,7 +1250,7 @@
 
   async function updatePaymentStatus(id, paid) {
     try {
-      await updateDoc(doc(db, "manarungat_registrations", id), { 
+      await updateDoc(doc(db, "manarathon_registrations", id), { 
         paymentStatus: paid,
         paymentVerifiedAt: paid ? new Date().toISOString() : null
       });
@@ -1035,7 +1264,7 @@
       renderTable();
       renderWidgets();
       renderDistanceCards();
-      showToast(`Payment marked as ${paid ? '✅ PAID' : '⏳ UNPAID'}`);
+      showToast(`Payment marked as ${paid ? '✅ PAID' : '⏳ UNDER REVIEW'}`);
     } catch (error) {
       console.error("Error updating payment:", error);
       showToast("Failed to update payment status", true);
@@ -1050,21 +1279,21 @@
     if (reg.receiptImageBase64) {
       receiptHtml = `<img src="${reg.receiptImageBase64}" alt="Payment Receipt" class="receipt-image" />`;
     } else {
-      receiptHtml = `<div class="receipt-placeholder">📄 No receipt uploaded</div>`;
+      receiptHtml = `<div class="receipt-placeholder"><i class="fas fa-file-image" style="font-size:2rem; display:block; margin-bottom:0.5rem;"></i> No receipt uploaded</div>`;
     }
     
     DOM.modalContent.innerHTML = `
-      <h3 style="margin-bottom: 1rem;">📄 Payment Receipt</h3>
+      <h3 style="margin-bottom: 1rem; color:#0a5c72;"><i class="fas fa-file-image" style="color:#06b6d4;"></i> Payment Receipt</h3>
       <p><strong>Name:</strong> ${escapeHtml(reg.fullName)}</p>
       <p><strong>Reference Number:</strong> ${escapeHtml(reg.paymentReference || 'Not provided')}</p>
       <p><strong>Distance:</strong> ${reg.distance || 'N/A'}</p>
-      <p><strong>Status:</strong> ${isPaid(reg) ? '✅ Paid' : '⏳ Unpaid'}</p>
+      <p><strong>Status:</strong> ${isPaid(reg) ? '✅ Paid' : '⏳ Under Review'}</p>
       ${reg.paymentVerifiedAt ? `<p><strong>Verified:</strong> ${new Date(reg.paymentVerifiedAt).toLocaleString()}</p>` : ''}
-      <hr style="margin: 1rem 0; border-color: #fadbc8;">
+      <hr style="margin: 1rem 0; border-color: #c8dce4;">
       ${receiptHtml}
       <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
-        ${!isPaid(reg) ? `<button class="action-btn paid-btn" id="markPaidFromReceipt">✅ Mark as Paid</button>` : ''}
-        <button class="action-btn" id="closeReceiptModal">Close</button>
+        ${!isPaid(reg) ? `<button class="action-btn paid-btn" id="markPaidFromReceipt"><i class="fas fa-check"></i> Mark as Paid</button>` : ''}
+        <button class="action-btn" id="closeReceiptModal" style="background:#e2e8f0;"><i class="fas fa-times"></i> Close</button>
       </div>
     `;
     
@@ -1098,10 +1327,10 @@
       participants = participants.filter(p => p.distance === distanceFilterVal);
     }
     
-    DOM.medicalStats.innerHTML = `📊 Showing ${participants.length} participant(s) with medical conditions`;
+    DOM.medicalStats.innerHTML = `<i class="fas fa-users"></i> Showing ${participants.length} participant(s) with medical conditions`;
     
     if (participants.length === 0) {
-      DOM.medicalListContainer.innerHTML = '<div class="empty-state">✨ No participants with medical conditions found</div>';
+      DOM.medicalListContainer.innerHTML = '<div class="empty-state"><i class="fas fa-heart" style="font-size:2rem; display:block; margin-bottom:0.5rem; color:#22c55e;"></i> No participants with medical conditions found</div>';
       return;
     }
     
@@ -1111,9 +1340,9 @@
         <div class="medical-card">
           <h4>${escapeHtml(p.fullName)}</h4>
           <p><strong>Age:</strong> ${p.age} | <strong>Gender:</strong> ${p.gender} | <strong>Distance:</strong> ${p.distance || 'N/A'}</p>
-          <p><strong>🩺 Medical Condition:</strong> <span class="medical-condition-text">${escapeHtml(p.medicalCondition)}</span></p>
-          <p><strong>📞 Contact:</strong> ${p.contactNumber || 'N/A'}</p>
-          <button class="action-btn view-btn" data-id="${p.id}" style="margin-top: 0.5rem;">👁️ View Full Details</button>
+          <p><strong><i class="fas fa-heartbeat" style="color:#ef4444;"></i> Medical Condition:</strong> <span class="medical-condition-text">${escapeHtml(p.medicalCondition)}</span></p>
+          <p><strong><i class="fas fa-phone"></i> Contact:</strong> ${p.contactNumber || 'N/A'}</p>
+          <button class="action-btn view-btn" data-id="${p.id}" style="margin-top: 0.5rem;"><i class="fas fa-eye"></i> View Full Details</button>
         </div>
       `;
     });
@@ -1126,7 +1355,7 @@
     });
   }
 
-  // Distance Cards (replaces Team Assignment)
+  // Distance Cards
   function renderDistanceCards() {
     const filter = currentDistanceFilter;
     
@@ -1135,21 +1364,23 @@
       participantsToShow = allRegistrations.filter(p => p.distance === filter);
     }
     
-    const distances = ['3K', '5K', '10K'];
+    const distances = ['5K', '10K', '21K', '42K'];
+    const distanceIcons = { '5K': 'fa-walking', '10K': 'fa-running', '21K': 'fa-trophy', '42K': 'fa-crown' };
+    const distanceColors = { '5K': '#22c55e', '10K': '#3b82f6', '21K': '#f59e0b', '42K': '#ef4444' };
     
     let html = '';
     distances.forEach(dist => {
       const members = participantsToShow.filter(p => p.distance === dist);
       html += `
-        <div class="distance-card">
-          <h4>🏃 ${dist}</h4>
-          <div class="member-count">${members.length} participants</div>
+        <div class="distance-card" style="border-top-color: ${distanceColors[dist]};">
+          <h4><i class="fas ${distanceIcons[dist]}" style="color:${distanceColors[dist]};"></i> ${dist}</h4>
+          <div class="member-count"><i class="fas fa-users"></i> ${members.length} participants</div>
           <ul>
             ${members.map(m => `
               <li>
                 <span>
                   <strong>${escapeHtml(m.fullName || '')}</strong>
-                  <span style="font-size:0.7rem; color:#7a5a4a; margin-left:8px;">${m.age || '?'}yo · ${m.gender || 'N/A'}</span>
+                  <span style="font-size:0.7rem; color:#5a7a8a; margin-left:8px;">${m.age || '?'}yo · ${m.gender || 'N/A'}</span>
                 </span>
                 <span>${getPaymentStatusBadge(m)}</span>
               </li>
@@ -1160,26 +1391,26 @@
       `;
     });
     
-    // Show unassigned (no distance selected)
     const unassigned = participantsToShow.filter(p => !p.distance);
-    html += `
-      <div class="distance-card" style="border-top-color: #9ca3af;">
-        <h4>❓ No Distance Selected</h4>
-        <div class="member-count">${unassigned.length} participants</div>
-        <ul>
-          ${unassigned.map(m => `
-            <li>
-              <span>
-                <strong>${escapeHtml(m.fullName || '')}</strong>
-                <span style="font-size:0.7rem; color:#7a5a4a; margin-left:8px;">${m.age || '?'}yo</span>
-              </span>
-              <span>${getPaymentStatusBadge(m)}</span>
-            </li>
-          `).join('')}
-          ${unassigned.length === 0 ? '<li style="color: #9ca3af; text-align:center; padding:1rem 0;">All participants have selected a distance</li>' : ''}
-        </ul>
-      </div>
-    `;
+    if (unassigned.length > 0) {
+      html += `
+        <div class="distance-card" style="border-top-color: #9ca3af;">
+          <h4><i class="fas fa-question-circle" style="color:#9ca3af;"></i> No Distance Selected</h4>
+          <div class="member-count"><i class="fas fa-users"></i> ${unassigned.length} participants</div>
+          <ul>
+            ${unassigned.map(m => `
+              <li>
+                <span>
+                  <strong>${escapeHtml(m.fullName || '')}</strong>
+                  <span style="font-size:0.7rem; color:#5a7a8a; margin-left:8px;">${m.age || '?'}yo</span>
+                </span>
+                <span>${getPaymentStatusBadge(m)}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `;
+    }
     
     DOM.distanceCardsContainer.innerHTML = html;
   }
@@ -1195,7 +1426,7 @@
       if (!applyAgeFilter(reg.age, ageVal)) return false;
       if (distanceVal && reg.distance !== distanceVal) return false;
       if (paymentVal === 'paid' && !isPaid(reg)) return false;
-      if (paymentVal === 'unpaid' && isPaid(reg)) return false;
+      if (paymentVal === 'Under Review' && isPaid(reg)) return false;
       return true;
     });
   }
@@ -1211,13 +1442,13 @@
   function updateFilterStats(filteredCount) {
     const totalCount = allRegistrations.length;
     DOM.filterStatsDiv.innerHTML = filteredCount === totalCount 
-      ? `📊 Showing all ${totalCount} registrations`
-      : `📊 Showing ${filteredCount} of ${totalCount} registrations (filtered)`;
+      ? `<i class="fas fa-users"></i> Showing all ${totalCount} registrations`
+      : `<i class="fas fa-filter"></i> Showing ${filteredCount} of ${totalCount} registrations (filtered)`;
   }
 
   async function fetchRegistrations() {
     try {
-      const q = query(collection(db, "manarungat_registrations"), orderBy("createdAt", "desc"));
+      const q = query(collection(db, "manarathon_registrations"), orderBy("createdAt", "desc"));
       const snapshot = await getDocs(q);
       allRegistrations = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
       renderWidgets();
@@ -1237,23 +1468,10 @@
     const paid = allRegistrations.filter(r => isPaid(r)).length;
     const unpaid = total - paid;
     
-    let distanceCounts = {};
-    allRegistrations.forEach(reg => {
-      if (reg.distance) {
-        distanceCounts[reg.distance] = (distanceCounts[reg.distance] || 0) + 1;
-      }
-    });
-    let mostPopular = "—";
-    let maxCount = 0;
-    for (let [dist, count] of Object.entries(distanceCounts)) {
-      if (count > maxCount) { maxCount = count; mostPopular = dist; }
-    }
-    
     DOM.widgetsContainer.innerHTML = `
-      <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">${total}</div></div>
-      <div class="widget-card"><h4>✅ Paid</h4><div class="widget-number">${paid}</div></div>
-      <div class="widget-card"><h4>⏳ Unpaid</h4><div class="widget-number">${unpaid}</div></div>
-      <div class="widget-card"><h4>🔥 Most Popular Distance</h4><div class="widget-number">${mostPopular !== "—" ? mostPopular : "N/A"}</div></div>
+      <div class="widget-card"><h4><i class="fas fa-users"></i> Total Registrants</h4><div class="widget-number">${total}</div></div>
+      <div class="widget-card"><h4><i class="fas fa-check-circle" style="color:#22c55e;"></i> Paid</h4><div class="widget-number">${paid}</div></div>
+      <div class="widget-card"><h4><i class="fas fa-clock" style="color:#f59e0b;"></i> Under Review</h4><div class="widget-number">${unpaid}</div></div>
     `;
   }
 
@@ -1262,7 +1480,7 @@
     updateFilterStats(filtered.length);
 
     if (filtered.length === 0) {
-      DOM.tableBody.innerHTML = '<tr><td colspan="9" class="empty-state">✨ No registrations match your filters</td></tr>';
+      DOM.tableBody.innerHTML = '<tr><td colspan="9" class="empty-state"><i class="fas fa-search" style="font-size:2rem; display:block; margin-bottom:0.5rem; opacity:0.3;"></i> No registrations match your filters</td></tr>';
       return;
     }
     
@@ -1277,8 +1495,8 @@
         <td>${getPaymentStatusBadge(reg)}</td>
         <td>${getReceiptButton(reg)}</td>
         <td>
-          <button class="action-btn view-btn" data-id="${reg.id}">👁️ View</button>
-          <button class="action-btn delete-btn" data-id="${reg.id}">🗑️ Delete</button>
+          <button class="action-btn view-btn" data-id="${reg.id}"><i class="fas fa-eye"></i> View</button>
+          <button class="action-btn delete-btn" data-id="${reg.id}"><i class="fas fa-trash"></i> Delete</button>
         </td>
       </tr>
     `).join('');
@@ -1292,13 +1510,9 @@
     });
     
     document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        if (confirm('⚠️ Permanently delete this registration?')) {
-          const id = btn.getAttribute('data-id');
-          await deleteDoc(doc(db, "manarungat_registrations", id));
-          showToast('Registration deleted successfully');
-          await fetchRegistrations();
-        }
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        showDeleteConfirm(id);
       });
     });
   }
@@ -1309,27 +1523,28 @@
     
     let receiptHtml = '';
     if (reg.receiptImageBase64) {
-      receiptHtml = `<div style="margin: 0.5rem 0;"><strong>Payment Receipt:</strong><br><img src="${reg.receiptImageBase64}" alt="Receipt" style="max-width:100%; max-height:200px; border-radius:12px; border:1px solid #fadbc8; margin-top:0.5rem;"></div>`;
+      receiptHtml = `<div style="margin: 0.5rem 0;"><strong><i class="fas fa-file-image"></i> Payment Receipt:</strong><br><img src="${reg.receiptImageBase64}" alt="Receipt" style="max-width:100%; max-height:200px; border-radius:12px; border:1px solid #c8dce4; margin-top:0.5rem;"></div>`;
     }
     
     DOM.modalContent.innerHTML = `
-      <h3 style="margin-bottom: 1rem;">📄 Participant Details</h3>
+      <h3 style="margin-bottom: 1rem; color:#0a5c72;"><i class="fas fa-user-circle" style="color:#06b6d4;"></i> Participant Details</h3>
       <p><strong>Full Name:</strong> ${escapeHtml(reg.fullName)}</p>
       <p><strong>Age:</strong> ${reg.age}</p>
       <p><strong>Gender:</strong> ${reg.gender}</p>
       <p><strong>Address:</strong> ${reg.address || '—'}</p>
-      <p><strong>Contact:</strong> ${reg.contactNumber}</p>
-      <p><strong>Emergency Contact:</strong> ${reg.emergencyContactName} (${reg.emergencyRelationship}) - ${reg.emergencyContactNumber}</p>
-      <p><strong>Shirt Size:</strong> ${reg.shirtSize}</p>
-      <p><strong>Distance:</strong> ${reg.distance || 'N/A'}</p>
-      <p><strong>Payment Reference:</strong> ${reg.paymentReference || 'Not provided'}</p>
-      <p><strong>Payment Status:</strong> ${isPaid(reg) ? '✅ Paid' : '⏳ Unpaid'}</p>
+      <p><strong><i class="fas fa-phone"></i> Contact:</strong> ${reg.contactNumber}</p>
+      <p><strong><i class="fas fa-user-md"></i> Emergency Contact:</strong> ${reg.emergencyContactName} (${reg.emergencyRelationship}) - ${reg.emergencyContactNumber}</p>
+      <p><strong><i class="fas fa-tshirt"></i> Shirt Size:</strong> ${reg.shirtSize}</p>
+      <p><strong><i class="fas fa-tshirt"></i> Singlet Size:</strong> ${reg.singletSize || 'N/A'}</p>
+      <p><strong><i class="fas fa-route"></i> Distance:</strong> ${reg.distance || 'N/A'}</p>
+      <p><strong><i class="fas fa-receipt"></i> Payment Reference:</strong> ${reg.paymentReference || 'Not provided'}</p>
+      <p><strong><i class="fas fa-credit-card"></i> Payment Status:</strong> ${isPaid(reg) ? '✅ Paid' : '⏳ Under Review'}</p>
       ${receiptHtml}
-      <p><strong>Medical Condition:</strong> <span style="color: #b91c1c; font-weight: 600;">${reg.medicalCondition || 'None'}</span></p>
-      <p><strong>Waiver Date:</strong> ${reg.waiverDate}</p>
+      <p><strong><i class="fas fa-heartbeat"></i> Medical Condition:</strong> <span style="color: #b91c1c; font-weight: 600;">${reg.medicalCondition || 'None'}</span></p>
+      <p><strong><i class="fas fa-calendar-day"></i> Waiver Date:</strong> ${reg.waiverDate}</p>
       <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
-        ${!isPaid(reg) ? `<button class="action-btn paid-btn" id="markPaidFromDetail">✅ Mark as Paid</button>` : ''}
-        <button class="action-btn" id="closeDetailModal">Close</button>
+        ${!isPaid(reg) ? `<button class="action-btn paid-btn" id="markPaidFromDetail"><i class="fas fa-check"></i> Mark as Paid</button>` : ''}
+        <button class="action-btn" id="closeDetailModal" style="background:#e2e8f0;"><i class="fas fa-times"></i> Close</button>
       </div>
     `;
     DOM.modalOverlay.classList.add('active');
@@ -1357,9 +1572,43 @@
     if (charts.gender) charts.gender.destroy();
     if (charts.distance) charts.distance.destroy();
     if (charts.shirt) charts.shirt.destroy();
-    charts.gender = new Chart(document.getElementById('genderChart'), { type: 'doughnut', data: { labels: Object.keys(genderMap), datasets: [{ data: Object.values(genderMap), backgroundColor: ['#2563eb', '#3b82f6', '#93c5fd', '#bfdbfe'] }] } });
-    charts.distance = new Chart(document.getElementById('distanceChart'), { type: 'bar', data: { labels: Object.keys(distanceCount), datasets: [{ label: 'Participants', data: Object.values(distanceCount), backgroundColor: '#f97316' }] } });
-    charts.shirt = new Chart(document.getElementById('shirtChart'), { type: 'pie', data: { labels: Object.keys(shirtMap), datasets: [{ data: Object.values(shirtMap), backgroundColor: ['#0f3b6f', '#1e6fdf', '#4b8fd8', '#7aade0', '#a6c8f0', '#cde2fe', '#f3c6b0'] }] } });
+    charts.gender = new Chart(document.getElementById('genderChart'), { 
+      type: 'doughnut', 
+      data: { 
+        labels: Object.keys(genderMap), 
+        datasets: [{ 
+          data: Object.values(genderMap), 
+          backgroundColor: ['#3b82f6', '#ec4899', '#8b5cf6', '#9ca3af'],
+          borderWidth: 0
+        }] 
+      },
+      options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    });
+    charts.distance = new Chart(document.getElementById('distanceChart'), { 
+      type: 'bar', 
+      data: { 
+        labels: Object.keys(distanceCount), 
+        datasets: [{ 
+          label: 'Participants', 
+          data: Object.values(distanceCount), 
+          backgroundColor: ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444'],
+          borderRadius: 8
+        }] 
+      },
+      options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+    charts.shirt = new Chart(document.getElementById('shirtChart'), { 
+      type: 'pie', 
+      data: { 
+        labels: Object.keys(shirtMap), 
+        datasets: [{ 
+          data: Object.values(shirtMap), 
+          backgroundColor: ['#0e7490', '#0891b2', '#06b6d4', '#22d3ee', '#67e8f9', '#a5f3fc', '#cffafe'],
+          borderWidth: 0
+        }] 
+      },
+      options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    });
   }
 
   function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
@@ -1387,16 +1636,16 @@
   DOM.exportBtn?.addEventListener('click', () => {
     const filtered = getFilteredRegistrations();
     if (!filtered.length) { showToast('No data to export', true); return; }
-    let csvRows = [["Full Name","Age","Gender","Distance","Shirt Size","Contact","Emergency Name","Waiver Date","Medical Condition","Payment Status","Reference Number"]];
+    let csvRows = [["Full Name","Age","Gender","Distance","Shirt Size","Singlet Size","Contact","Emergency Name","Waiver Date","Medical Condition","Payment Status","Reference Number"]];
     filtered.forEach(r => {
-      csvRows.push([r.fullName, r.age, r.gender, r.distance || 'N/A', r.shirtSize, r.contactNumber, r.emergencyContactName, r.waiverDate, r.medicalCondition || 'None', isPaid(r) ? 'Paid' : 'Unpaid', r.paymentReference || '']);
+      csvRows.push([r.fullName, r.age, r.gender, r.distance || 'N/A', r.shirtSize, r.singletSize || 'N/A', r.contactNumber, r.emergencyContactName, r.waiverDate, r.medicalCondition || 'None', isPaid(r) ? 'Paid' : 'Under Review', r.paymentReference || '']);
     });
     const csvContent = csvRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.href = url;
-    link.setAttribute('download', 'manarungat_registrations.csv');
+    link.setAttribute('download', 'manarathon_registrations.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1416,7 +1665,7 @@
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.href = url;
-    link.setAttribute('download', 'manarungat_medical_conditions.csv');
+    link.setAttribute('download', 'manarathon_medical_conditions.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1437,6 +1686,15 @@
   DOM.paymentStatusFilter?.addEventListener('change', () => renderPaymentList());
 
   if (DOM.distanceTabs) {
+    // Generate distance tabs dynamically
+    const distances = ['5K', '10K', '21K', '42K'];
+    const icons = { '5K': 'fa-walking', '10K': 'fa-running', '21K': 'fa-trophy', '42K': 'fa-crown' };
+    let tabsHtml = `<button class="distance-tab active" data-distance="all"><i class="fas fa-users"></i> All</button>`;
+    distances.forEach(dist => {
+      tabsHtml += `<button class="distance-tab" data-distance="${dist}"><i class="fas ${icons[dist]}"></i> ${dist}</button>`;
+    });
+    DOM.distanceTabs.innerHTML = tabsHtml;
+
     DOM.distanceTabs.querySelectorAll('.distance-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         DOM.distanceTabs.querySelectorAll('.distance-tab').forEach(t => t.classList.remove('active'));
@@ -1513,6 +1771,7 @@
   DOM.modalOverlay?.addEventListener('click', (e) => {
     if (e.target === DOM.modalOverlay) DOM.modalOverlay.classList.remove('active');
   });
+    // MADE AND DEVELOPED BY JOHN STEVEN A. MACAPAÑAS (EXECUTIVE ASSISTANT, WARAYA YOUTH ADVOCATES)
 </script>
 </body>
 </html>
