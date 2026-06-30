@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/Manaragat2026.png">
-  <title>ManaraTHON · Organizer's Dashboard</title>
+  <title>ManaraTHON · Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
@@ -835,6 +835,51 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
     }
+
+    /* Amount widget */
+    .widget-amount {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0a5c72;
+    }
+
+    .widget-amount .currency {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #5a7a8a;
+    }
+
+    .payment-totals {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .payment-total-card {
+      background: #f8fafc;
+      padding: 0.8rem 1rem;
+      border-radius: 16px;
+      border: 1px solid #c8dce4;
+      text-align: center;
+    }
+
+    .payment-total-card .dist-label {
+      font-weight: 600;
+      color: #0a5c72;
+      font-size: 0.85rem;
+    }
+
+    .payment-total-card .dist-amount {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0e7490;
+    }
+
+    .payment-total-card .dist-count {
+      font-size: 0.7rem;
+      color: #5a7a8a;
+    }
   </style>
 </head>
 <body>
@@ -851,7 +896,7 @@
   <nav>
     <a href="#" data-section="dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a>
     <a href="#" data-section="payments"><i class="fas fa-credit-card"></i> Payment Verification</a>
-    <a href="#" data-section="distances"><i class="fas fa-running"></i> Distance Groups</a>
+    <!-- <a href="#" data-section="distances"><i class="fas fa-running"></i> Distance Groups</a> -->
     <a href="#" data-section="medicalConditions"><i class="fas fa-heartbeat"></i> Medical Conditions</a>
     <a href="#" data-section="statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
     <div class="logout-link">
@@ -875,7 +920,14 @@
       <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">—</div></div>
       <div class="widget-card"><h4><i class="fas fa-check-circle" style="color:#22c55e;"></i> Paid</h4><div class="widget-number">—</div></div>
       <div class="widget-card"><h4><i class="fas fa-clock" style="color:#f59e0b;"></i> Under Review</h4><div class="widget-number">—</div></div>
+      <div class="widget-card"><h4><i class="fas fa-money-bill-wave" style="color:#f97316;"></i> Total Expected Fees</h4><div class="widget-amount" id="totalAmountDisplay"><span class="currency">₱</span> —</div></div>
     </div>
+    
+    <!-- Payment Totals by Distance -->
+    <div class="payment-totals" id="paymentTotalsContainer">
+      <!-- Dynamically populated -->
+    </div>
+    
     <div class="registrations-panel">
       <div class="panel-header">
         <h3><i class="fas fa-list-ul"></i> Registrations Management</h3>
@@ -884,8 +936,8 @@
       
       <div class="filter-bar">
         <div class="filter-group">
-          <label><i class="fas fa-search"></i> Search Name</label>
-          <input type="text" id="searchNameInput" placeholder="Full name...">
+          <label><i class="fas fa-search"></i> Search</label>
+          <input type="text" id="searchNameInput" placeholder="Name, Contact, Ref #, Distance...">
         </div>
         
         <div class="filter-group">
@@ -949,10 +1001,15 @@
       
       <div class="payment-summary" id="paymentSummary"></div>
       
+      <!-- Payment Totals by Distance -->
+      <div class="payment-totals" id="paymentTotalsContainer2">
+        <!-- Dynamically populated -->
+      </div>
+      
       <div class="filter-bar">
         <div class="filter-group">
-          <label><i class="fas fa-search"></i> Search Name</label>
-          <input type="text" id="paymentSearchInput" placeholder="Search by name...">
+          <label><i class="fas fa-search"></i> Search</label>
+          <input type="text" id="paymentSearchInput" placeholder="Name, Contact, Ref #, Distance...">
         </div>
         <div class="filter-group">
           <label><i class="fas fa-credit-card"></i> Payment Status</label>
@@ -999,8 +1056,8 @@
       
       <div class="filter-bar">
         <div class="filter-group">
-          <label><i class="fas fa-search"></i> Search Name</label>
-          <input type="text" id="medicalSearchInput" placeholder="Search by name...">
+          <label><i class="fas fa-search"></i> Search</label>
+          <input type="text" id="medicalSearchInput" placeholder="Name, Contact, Ref #, Distance...">
         </div>
         <div class="filter-group">
           <label><i class="fas fa-route"></i> Filter by Distance</label>
@@ -1071,6 +1128,9 @@
   const auth = getAuth(app);
   const db = getFirestore(app);
 
+  const FEE_MAP = { '5K': 800, '10K': 1000, '21K': 1200, '42K': 1400 };
+  const DISTANCES = ['5K', '10K', '21K', '42K'];
+
   let allRegistrations = [];
   let charts = { gender: null, distance: null, shirt: null };
   let currentDistanceFilter = "all";
@@ -1084,6 +1144,9 @@
     statisticsSection: document.getElementById('statisticsSection'),
     tableBody: document.getElementById('tableBody'),
     widgetsContainer: document.getElementById('widgetsContainer'),
+    totalAmountDisplay: document.getElementById('totalAmountDisplay'),
+    paymentTotalsContainer: document.getElementById('paymentTotalsContainer'),
+    paymentTotalsContainer2: document.getElementById('paymentTotalsContainer2'),
     searchInput: document.getElementById('searchNameInput'),
     ageFilter: document.getElementById('ageFilterSelect'),
     distanceFilter: document.getElementById('distanceFilterSelect'),
@@ -1137,6 +1200,105 @@
     return '<span style="color: #9ca3af; font-size:0.7rem;">No receipt</span>';
   }
 
+  // Calculate payment totals by distance
+  function calculatePaymentTotals(registrations) {
+    const totals = {};
+    DISTANCES.forEach(dist => {
+      totals[dist] = { count: 0, amount: 0, paidCount: 0, paidAmount: 0 };
+    });
+    totals['Total'] = { count: 0, amount: 0, paidCount: 0, paidAmount: 0 };
+
+    registrations.forEach(reg => {
+      const dist = reg.distance || 'Unknown';
+      const fee = FEE_MAP[dist] || 0;
+      const paid = isPaid(reg);
+      
+      if (totals[dist]) {
+        totals[dist].count++;
+        totals[dist].amount += fee;
+        if (paid) {
+          totals[dist].paidCount++;
+          totals[dist].paidAmount += fee;
+        }
+      } else {
+        // Handle unknown distances
+        if (!totals['Unknown']) {
+          totals['Unknown'] = { count: 0, amount: 0, paidCount: 0, paidAmount: 0 };
+        }
+        totals['Unknown'].count++;
+        totals['Unknown'].amount += fee;
+        if (paid) {
+          totals['Unknown'].paidCount++;
+          totals['Unknown'].paidAmount += fee;
+        }
+      }
+      
+      totals['Total'].count++;
+      totals['Total'].amount += fee;
+      if (paid) {
+        totals['Total'].paidCount++;
+        totals['Total'].paidAmount += fee;
+      }
+    });
+
+    return totals;
+  }
+
+  function renderPaymentTotals(containerId, registrations) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    const totals = calculatePaymentTotals(registrations);
+    let html = '';
+    
+    DISTANCES.forEach(dist => {
+      const data = totals[dist] || { count: 0, amount: 0, paidCount: 0, paidAmount: 0 };
+      html += `
+        <div class="payment-total-card">
+          <div class="dist-label">${dist}</div>
+          <div class="dist-amount">₱${data.amount.toLocaleString()}</div>
+          <div class="dist-count">${data.count} registrants · ${data.paidCount} paid</div>
+        </div>
+      `;
+    });
+    
+    // Add Unknown if exists
+    if (totals['Unknown'] && totals['Unknown'].count > 0) {
+      const data = totals['Unknown'];
+      html += `
+        <div class="payment-total-card" style="border-color:#f59e0b;">
+          <div class="dist-label">⚠️ Unknown</div>
+          <div class="dist-amount">₱${data.amount.toLocaleString()}</div>
+          <div class="dist-count">${data.count} registrants · ${data.paidCount} paid</div>
+        </div>
+      `;
+    }
+    
+    // Add Total
+    const totalData = totals['Total'];
+    html += `
+      <div class="payment-total-card" style="border-color:#0e7490; background:#e6f4f9;">
+        <div class="dist-label" style="font-weight:700;">📊 Total</div>
+        <div class="dist-amount" style="font-size:1.3rem; color:#0a5c72;">₱${totalData.amount.toLocaleString()}</div>
+        <div class="dist-count">${totalData.count} registrants · ₱${totalData.paidAmount.toLocaleString()} paid</div>
+      </div>
+    `;
+    
+    container.innerHTML = html;
+  }
+
+  // Enhanced search function - searches name, contact, reference, and distance
+  function matchesSearch(reg, searchTerm) {
+    if (!searchTerm) return true;
+    const term = searchTerm.toLowerCase().trim();
+    return (
+      (reg.fullName && reg.fullName.toLowerCase().includes(term)) ||
+      (reg.contactNumber && reg.contactNumber.toLowerCase().includes(term)) ||
+      (reg.paymentReference && reg.paymentReference.toLowerCase().includes(term)) ||
+      (reg.distance && reg.distance.toLowerCase().includes(term))
+    );
+  }
+
   // Delete Confirmation Functions
   function showDeleteConfirm(id) {
     pendingDeleteId = id;
@@ -1175,15 +1337,15 @@
   function renderPaymentList() {
     let participants = allRegistrations;
     
-    const searchTerm = DOM.paymentSearchInput?.value.toLowerCase() || '';
+    const searchTerm = DOM.paymentSearchInput?.value || '';
     const statusFilter = DOM.paymentStatusFilter?.value || 'all';
     
     if (searchTerm) {
-      participants = participants.filter(p => p.fullName?.toLowerCase().includes(searchTerm));
+      participants = participants.filter(p => matchesSearch(p, searchTerm));
     }
     if (statusFilter === 'paid') {
       participants = participants.filter(p => isPaid(p));
-    } else if (statusFilter === 'under review') {
+    } else if (statusFilter === 'unpaid') {
       participants = participants.filter(p => !isPaid(p));
     }
     
@@ -1195,6 +1357,9 @@
       <div class="payment-stat" style="background:#dcfce7; border-color:#86efac;"><strong>✅ Paid:</strong> ${totalPaid}</div>
       <div class="payment-stat" style="background:#fee2e2; border-color:#fca5a5;"><strong>⏳ Under Review:</strong> ${totalUnpaid}</div>
     `;
+    
+    // Render payment totals for payment section
+    renderPaymentTotals('paymentTotalsContainer2', allRegistrations);
     
     DOM.paymentStats.innerHTML = `<i class="fas fa-users"></i> Showing ${participants.length} registrant(s)`;
     
@@ -1211,12 +1376,14 @@
           <div>
             <strong>${escapeHtml(p.fullName || '')}</strong>
             <span style="font-size:0.8rem; color:#5a7a8a; margin-left:8px;">${p.distance || 'N/A'} · ${p.age || '?'}yo</span>
+            <br><span style="font-size:0.7rem; color:#7a9aaa;">Ref: ${escapeHtml(p.paymentReference || 'N/A')}</span>
           </div>
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             <span>${getPaymentStatusBadge(p)}</span>
             ${hasReceipt ? `<button class="action-btn receipt-btn" data-id="${p.id}"><i class="fas fa-file-image"></i> Receipt</button>` : '<span style="color:#9ca3af; font-size:0.7rem;">No receipt</span>'}
             ${!isPaid(p) ? `<button class="action-btn paid-btn mark-paid-btn" data-id="${p.id}"><i class="fas fa-check"></i> Mark Paid</button>` : ''}
             ${isPaid(p) ? `<button class="action-btn unpaid-btn mark-unpaid-btn" data-id="${p.id}"><i class="fas fa-undo"></i> Mark Under Review</button>` : ''}
+            <button class="action-btn view-btn" data-id="${p.id}"><i class="fas fa-eye"></i> View</button>
           </div>
         </div>
       `;
@@ -1317,11 +1484,11 @@
   function renderMedicalConditions() {
     let participants = getParticipantsWithMedicalConditions();
     
-    const searchTerm = DOM.medicalSearchInput?.value.toLowerCase() || '';
+    const searchTerm = DOM.medicalSearchInput?.value || '';
     const distanceFilterVal = DOM.medicalDistanceFilter?.value || 'all';
     
     if (searchTerm) {
-      participants = participants.filter(p => p.fullName?.toLowerCase().includes(searchTerm));
+      participants = participants.filter(p => matchesSearch(p, searchTerm));
     }
     if (distanceFilterVal !== 'all') {
       participants = participants.filter(p => p.distance === distanceFilterVal);
@@ -1416,17 +1583,17 @@
   }
 
   function getFilteredRegistrations() {
-    const searchTerm = DOM.searchInput.value.toLowerCase();
+    const searchTerm = DOM.searchInput.value || '';
     const ageVal = DOM.ageFilter.value;
     const distanceVal = DOM.distanceFilter.value;
     const paymentVal = DOM.paymentFilter.value;
 
     return allRegistrations.filter(reg => {
-      if (!reg.fullName?.toLowerCase().includes(searchTerm)) return false;
+      if (!matchesSearch(reg, searchTerm)) return false;
       if (!applyAgeFilter(reg.age, ageVal)) return false;
       if (distanceVal && reg.distance !== distanceVal) return false;
       if (paymentVal === 'paid' && !isPaid(reg)) return false;
-      if (paymentVal === 'Under Review' && isPaid(reg)) return false;
+      if (paymentVal === 'unpaid' && isPaid(reg)) return false;
       return true;
     });
   }
@@ -1468,11 +1635,24 @@
     const paid = allRegistrations.filter(r => isPaid(r)).length;
     const unpaid = total - paid;
     
+    // Calculate total expected fees
+    let totalAmount = 0;
+    allRegistrations.forEach(reg => {
+      const fee = FEE_MAP[reg.distance] || 0;
+      totalAmount += fee;
+    });
+    
+    DOM.totalAmountDisplay.innerHTML = `<span class="currency">₱</span> ${totalAmount.toLocaleString()}`;
+    
     DOM.widgetsContainer.innerHTML = `
       <div class="widget-card"><h4><i class="fas fa-users"></i> Total Registrants</h4><div class="widget-number">${total}</div></div>
       <div class="widget-card"><h4><i class="fas fa-check-circle" style="color:#22c55e;"></i> Paid</h4><div class="widget-number">${paid}</div></div>
       <div class="widget-card"><h4><i class="fas fa-clock" style="color:#f59e0b;"></i> Under Review</h4><div class="widget-number">${unpaid}</div></div>
+      <div class="widget-card"><h4><i class="fas fa-money-bill-wave" style="color:#f97316;"></i> Total Expected Fees</h4><div class="widget-amount"><span class="currency">₱</span> ${totalAmount.toLocaleString()}</div></div>
     `;
+    
+    // Render payment totals for dashboard
+    renderPaymentTotals('paymentTotalsContainer', allRegistrations);
   }
 
   function renderTable() {
