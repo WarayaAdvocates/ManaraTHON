@@ -224,7 +224,7 @@
       color: #5a7a8a;
     }
 
-    .registrations-panel, .distance-panel, .medical-panel, .payment-panel {
+    .registrations-panel, .distance-panel, .medical-panel, .payment-panel, .deleted-panel {
       background: rgba(255,255,255,0.92);
       border-radius: 32px;
       padding: 1.5rem;
@@ -328,6 +328,24 @@
 
     .export-btn:hover {
       background: #084a5c !important;
+    }
+
+    .restore-btn {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .restore-btn:hover {
+      background: #bbf7d0;
+    }
+
+    .permanent-delete-btn {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .permanent-delete-btn:hover {
+      background: #fecaca;
     }
 
     .table-wrapper {
@@ -880,6 +898,16 @@
       font-size: 0.7rem;
       color: #5a7a8a;
     }
+
+    .deleted-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: #fef3c7;
+      color: #92400e;
+    }
   </style>
 </head>
 <body>
@@ -896,9 +924,9 @@
   <nav>
     <a href="#" data-section="dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a>
     <a href="#" data-section="payments"><i class="fas fa-credit-card"></i> Payment Verification</a>
-    <!-- <a href="#" data-section="distances"><i class="fas fa-running"></i> Distance Groups</a> -->
     <a href="#" data-section="medicalConditions"><i class="fas fa-heartbeat"></i> Medical Conditions</a>
     <a href="#" data-section="statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
+    <a href="#" data-section="deleted"><i class="fas fa-trash-restore"></i> Recently Deleted</a>
     <div class="logout-link">
       <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
@@ -1030,21 +1058,6 @@
     </div>
   </div>
 
-  <!-- DISTANCE GROUPS SECTION -->
-  <div id="distancesSection" style="display: none;">
-    <div class="distance-panel">
-      <div class="panel-header">
-        <h3><i class="fas fa-running"></i> Distance Groups</h3>
-        <span style="font-size:0.75rem; color:#5a7a8a;">View participants by distance</span>
-      </div>
-      <p style="margin-bottom: 1rem; color: #5a7a8a; font-size:0.9rem;">View all participants grouped by their chosen run distance.</p>
-      
-      <div class="distance-tabs" id="distanceTabs"></div>
-      
-      <div class="distance-cards" id="distanceCardsContainer"></div>
-    </div>
-  </div>
-
   <!-- MEDICAL CONDITIONS SECTION -->
   <div id="medicalConditionsSection" style="display: none;">
     <div class="medical-panel">
@@ -1089,6 +1102,39 @@
       <div class="chart-card"><h4 style="margin-bottom:0.8rem; color:#0a5c72; font-size:0.9rem;"><i class="fas fa-tshirt"></i> Shirt Size Distribution</h4><canvas id="shirtChart"></canvas></div>
     </div>
   </div>
+
+  <!-- RECENTLY DELETED SECTION -->
+  <div id="deletedSection" style="display: none;">
+    <div class="deleted-panel">
+      <div class="panel-header">
+        <h3><i class="fas fa-trash-restore"></i> Recently Deleted</h3>
+        <span style="font-size:0.75rem; color:#5a7a8a;">Restore accidentally deleted registrations</span>
+      </div>
+      <p style="margin-bottom: 1rem; color: #5a7a8a; font-size:0.9rem;">Registrations moved here can be restored within 30 days. After 30 days, they will be permanently deleted.</p>
+      
+      <div class="filter-bar">
+        <div class="filter-group">
+          <label><i class="fas fa-search"></i> Search</label>
+          <input type="text" id="deletedSearchInput" placeholder="Name, Contact, Ref #, Distance...">
+        </div>
+        <div class="filter-actions">
+          <button id="clearDeletedFiltersBtn" class="clear-filters-btn"><i class="fas fa-undo"></i> Clear</button>
+        </div>
+      </div>
+      
+      <div id="deletedStats" class="filter-stats"></div>
+      
+      <div class="table-wrapper">
+        <table id="deletedTable">
+          <thead>
+            <tr><th>Full Name</th><th>Age</th><th>Gender</th><th>Distance</th><th>Contact</th><th>Deleted At</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="deletedTableBody"><tr><td colspan="7" class="empty-state"><i class="fas fa-trash" style="font-size:2rem; display:block; margin-bottom:0.5rem; opacity:0.3;"></i> No deleted registrations</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Detail Modal -->
@@ -1100,11 +1146,11 @@
 <div id="deleteConfirmModal" class="modal-overlay">
   <div class="modal-container confirm-modal-content">
     <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
-    <h3>Delete Registration</h3>
-    <p>Are you sure you want to permanently delete this registration? This action cannot be undone.</p>
+    <h3>Move to Recently Deleted</h3>
+    <p>This registration will be moved to the "Recently Deleted" section where it can be restored within 30 days.</p>
     <div class="btn-group">
       <button class="btn-cancel" id="cancelDeleteBtn"><i class="fas fa-times"></i> Cancel</button>
-      <button class="btn-confirm" id="confirmDeleteBtn"><i class="fas fa-trash"></i> Delete</button>
+      <button class="btn-confirm" id="confirmDeleteBtn"><i class="fas fa-trash"></i> Move to Deleted</button>
     </div>
   </div>
 </div>
@@ -1112,7 +1158,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-  import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc, setDoc, getDoc, where } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC2jwodhMqk3_fHYZiM8oPeRBb4MtXcMzQ",
@@ -1132,6 +1178,7 @@
   const DISTANCES = ['5K', '10K', '21K', '42K'];
 
   let allRegistrations = [];
+  let deletedRegistrations = [];
   let charts = { gender: null, distance: null, shirt: null };
   let currentDistanceFilter = "all";
   let pendingDeleteId = null;
@@ -1139,10 +1186,11 @@
   const DOM = {
     dashboardSection: document.getElementById('dashboardSection'),
     paymentsSection: document.getElementById('paymentsSection'),
-    distancesSection: document.getElementById('distancesSection'),
     medicalConditionsSection: document.getElementById('medicalConditionsSection'),
     statisticsSection: document.getElementById('statisticsSection'),
+    deletedSection: document.getElementById('deletedSection'),
     tableBody: document.getElementById('tableBody'),
+    deletedTableBody: document.getElementById('deletedTableBody'),
     widgetsContainer: document.getElementById('widgetsContainer'),
     totalAmountDisplay: document.getElementById('totalAmountDisplay'),
     paymentTotalsContainer: document.getElementById('paymentTotalsContainer'),
@@ -1156,8 +1204,6 @@
     filterStatsDiv: document.getElementById('filterStats'),
     modalOverlay: document.getElementById('detailModal'),
     modalContent: document.getElementById('modalContent'),
-    distanceCardsContainer: document.getElementById('distanceCardsContainer'),
-    distanceTabs: document.getElementById('distanceTabs'),
     medicalSearchInput: document.getElementById('medicalSearchInput'),
     medicalDistanceFilter: document.getElementById('medicalDistanceFilter'),
     clearMedicalFiltersBtn: document.getElementById('clearMedicalFiltersBtn'),
@@ -1172,7 +1218,10 @@
     paymentSummary: document.getElementById('paymentSummary'),
     deleteConfirmModal: document.getElementById('deleteConfirmModal'),
     confirmDeleteBtn: document.getElementById('confirmDeleteBtn'),
-    cancelDeleteBtn: document.getElementById('cancelDeleteBtn')
+    cancelDeleteBtn: document.getElementById('cancelDeleteBtn'),
+    deletedSearchInput: document.getElementById('deletedSearchInput'),
+    clearDeletedFiltersBtn: document.getElementById('clearDeletedFiltersBtn'),
+    deletedStats: document.getElementById('deletedStats')
   };
 
   function showToast(message, isError = false) {
@@ -1221,7 +1270,6 @@
           totals[dist].paidAmount += fee;
         }
       } else {
-        // Handle unknown distances
         if (!totals['Unknown']) {
           totals['Unknown'] = { count: 0, amount: 0, paidCount: 0, paidAmount: 0 };
         }
@@ -1262,7 +1310,6 @@
       `;
     });
     
-    // Add Unknown if exists
     if (totals['Unknown'] && totals['Unknown'].count > 0) {
       const data = totals['Unknown'];
       html += `
@@ -1274,7 +1321,6 @@
       `;
     }
     
-    // Add Total
     const totalData = totals['Total'];
     html += `
       <div class="payment-total-card" style="border-color:#0e7490; background:#e6f4f9;">
@@ -1287,7 +1333,6 @@
     container.innerHTML = html;
   }
 
-  // Enhanced search function - searches name, contact, reference, and distance
   function matchesSearch(reg, searchTerm) {
     if (!searchTerm) return true;
     const term = searchTerm.toLowerCase().trim();
@@ -1321,17 +1366,126 @@
   DOM.confirmDeleteBtn.addEventListener('click', async function() {
     if (pendingDeleteId) {
       try {
-        await deleteDoc(doc(db, "manarathon_registrations", pendingDeleteId));
-        showToast('Registration deleted successfully');
-        hideDeleteConfirm();
-        await fetchRegistrations();
+        const reg = allRegistrations.find(r => r.id === pendingDeleteId);
+        if (reg) {
+          // Move to deleted collection
+          const deletedRef = doc(db, "deleted_registrations", pendingDeleteId);
+          await setDoc(deletedRef, {
+            ...reg,
+            deletedAt: new Date().toISOString()
+          });
+          
+          // Remove from main collection
+          await deleteDoc(doc(db, "manarathon_registrations", pendingDeleteId));
+          
+          showToast('Registration moved to Recently Deleted');
+          hideDeleteConfirm();
+          await fetchRegistrations();
+          await fetchDeletedRegistrations();
+        }
       } catch (error) {
         console.error("Delete error:", error);
-        showToast('Failed to delete registration', true);
+        showToast('Failed to move registration', true);
         hideDeleteConfirm();
       }
     }
   });
+
+  // Fetch deleted registrations
+  async function fetchDeletedRegistrations() {
+    try {
+      const q = query(collection(db, "deleted_registrations"), orderBy("deletedAt", "desc"));
+      const snapshot = await getDocs(q);
+      deletedRegistrations = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+      renderDeletedTable();
+    } catch (err) {
+      console.error("Error fetching deleted:", err);
+    }
+  }
+
+  // Render deleted table
+  function renderDeletedTable() {
+    const searchTerm = DOM.deletedSearchInput?.value || '';
+    let filtered = deletedRegistrations;
+    
+    if (searchTerm) {
+      filtered = filtered.filter(reg => matchesSearch(reg, searchTerm));
+    }
+    
+    DOM.deletedStats.innerHTML = `<i class="fas fa-trash"></i> Showing ${filtered.length} deleted registration(s) (${deletedRegistrations.length} total)`;
+    
+    if (filtered.length === 0) {
+      DOM.deletedTableBody.innerHTML = '<tr><td colspan="7" class="empty-state"><i class="fas fa-trash" style="font-size:2rem; display:block; margin-bottom:0.5rem; opacity:0.3;"></i> No deleted registrations found</td></tr>';
+      return;
+    }
+    
+    DOM.deletedTableBody.innerHTML = filtered.map(reg => `
+      <tr>
+        <td><strong>${escapeHtml(reg.fullName || '')}</strong></td>
+        <td>${reg.age || '—'}</td>
+        <td>${reg.gender || '—'}</td>
+        <td><span class="distance-badge">${reg.distance || '—'}</span></td>
+        <td>${reg.contactNumber || '—'}</td>
+        <td>${reg.deletedAt ? new Date(reg.deletedAt).toLocaleString() : '—'}</td>
+        <td>
+          <button class="action-btn restore-btn" data-id="${reg.id}"><i class="fas fa-undo"></i> Restore</button>
+          <button class="action-btn permanent-delete-btn" data-id="${reg.id}"><i class="fas fa-trash"></i> Permanently Delete</button>
+        </td>
+      </tr>
+    `).join('');
+
+    document.querySelectorAll('.restore-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        await restoreRegistration(id);
+      });
+    });
+
+    document.querySelectorAll('.permanent-delete-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        if (confirm('⚠️ This will permanently delete this registration. This action cannot be undone. Are you sure?')) {
+          await permanentlyDeleteRegistration(id);
+        }
+      });
+    });
+  }
+
+  // Restore registration
+  async function restoreRegistration(id) {
+    try {
+      const reg = deletedRegistrations.find(r => r.id === id);
+      if (reg) {
+        // Remove deletedAt field before restoring
+        const { deletedAt, ...restoredData } = reg;
+        
+        // Add back to main collection
+        await setDoc(doc(db, "manarathon_registrations", id), restoredData);
+        
+        // Remove from deleted collection
+        await deleteDoc(doc(db, "deleted_registrations", id));
+        
+        showToast('Registration restored successfully');
+        await fetchRegistrations();
+        await fetchDeletedRegistrations();
+      }
+    } catch (error) {
+      console.error("Restore error:", error);
+      showToast('Failed to restore registration', true);
+    }
+  }
+
+  // Permanently delete registration
+  async function permanentlyDeleteRegistration(id) {
+    try {
+      await deleteDoc(doc(db, "deleted_registrations", id));
+      showToast('Registration permanently deleted');
+      await fetchDeletedRegistrations();
+    } catch (error) {
+      console.error("Permanent delete error:", error);
+      showToast('Failed to permanently delete registration', true);
+    }
+  }
 
   // Payment Verification - Render
   function renderPaymentList() {
@@ -1358,7 +1512,6 @@
       <div class="payment-stat" style="background:#fee2e2; border-color:#fca5a5;"><strong>⏳ Under Review:</strong> ${totalUnpaid}</div>
     `;
     
-    // Render payment totals for payment section
     renderPaymentTotals('paymentTotalsContainer2', allRegistrations);
     
     DOM.paymentStats.innerHTML = `<i class="fas fa-users"></i> Showing ${participants.length} registrant(s)`;
@@ -1430,7 +1583,6 @@
       renderPaymentList();
       renderTable();
       renderWidgets();
-      renderDistanceCards();
       showToast(`Payment marked as ${paid ? '✅ PAID' : '⏳ UNDER REVIEW'}`);
     } catch (error) {
       console.error("Error updating payment:", error);
@@ -1522,66 +1674,6 @@
     });
   }
 
-  // Distance Cards
-  function renderDistanceCards() {
-    const filter = currentDistanceFilter;
-    
-    let participantsToShow = allRegistrations;
-    if (filter !== "all") {
-      participantsToShow = allRegistrations.filter(p => p.distance === filter);
-    }
-    
-    const distances = ['5K', '10K', '21K', '42K'];
-    const distanceIcons = { '5K': 'fa-walking', '10K': 'fa-running', '21K': 'fa-trophy', '42K': 'fa-crown' };
-    const distanceColors = { '5K': '#22c55e', '10K': '#3b82f6', '21K': '#f59e0b', '42K': '#ef4444' };
-    
-    let html = '';
-    distances.forEach(dist => {
-      const members = participantsToShow.filter(p => p.distance === dist);
-      html += `
-        <div class="distance-card" style="border-top-color: ${distanceColors[dist]};">
-          <h4><i class="fas ${distanceIcons[dist]}" style="color:${distanceColors[dist]};"></i> ${dist}</h4>
-          <div class="member-count"><i class="fas fa-users"></i> ${members.length} participants</div>
-          <ul>
-            ${members.map(m => `
-              <li>
-                <span>
-                  <strong>${escapeHtml(m.fullName || '')}</strong>
-                  <span style="font-size:0.7rem; color:#5a7a8a; margin-left:8px;">${m.age || '?'}yo · ${m.gender || 'N/A'}</span>
-                </span>
-                <span>${getPaymentStatusBadge(m)}</span>
-              </li>
-            `).join('')}
-            ${members.length === 0 ? '<li style="color: #9ca3af; text-align:center; padding:1rem 0;">No participants registered for this distance</li>' : ''}
-          </ul>
-        </div>
-      `;
-    });
-    
-    const unassigned = participantsToShow.filter(p => !p.distance);
-    if (unassigned.length > 0) {
-      html += `
-        <div class="distance-card" style="border-top-color: #9ca3af;">
-          <h4><i class="fas fa-question-circle" style="color:#9ca3af;"></i> No Distance Selected</h4>
-          <div class="member-count"><i class="fas fa-users"></i> ${unassigned.length} participants</div>
-          <ul>
-            ${unassigned.map(m => `
-              <li>
-                <span>
-                  <strong>${escapeHtml(m.fullName || '')}</strong>
-                  <span style="font-size:0.7rem; color:#5a7a8a; margin-left:8px;">${m.age || '?'}yo</span>
-                </span>
-                <span>${getPaymentStatusBadge(m)}</span>
-              </li>
-            `).join('')}
-          </ul>
-        </div>
-      `;
-    }
-    
-    DOM.distanceCardsContainer.innerHTML = html;
-  }
-
   function getFilteredRegistrations() {
     const searchTerm = DOM.searchInput.value || '';
     const ageVal = DOM.ageFilter.value;
@@ -1620,7 +1712,6 @@
       allRegistrations = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
       renderWidgets();
       renderTable();
-      renderDistanceCards();
       renderMedicalConditions();
       renderPaymentList();
       renderCharts();
@@ -1635,7 +1726,6 @@
     const paid = allRegistrations.filter(r => isPaid(r)).length;
     const unpaid = total - paid;
     
-    // Calculate total expected fees
     let totalAmount = 0;
     allRegistrations.forEach(reg => {
       const fee = FEE_MAP[reg.distance] || 0;
@@ -1651,7 +1741,6 @@
       <div class="widget-card"><h4><i class="fas fa-money-bill-wave" style="color:#f97316;"></i> Total Expected Fees</h4><div class="widget-amount"><span class="currency">₱</span> ${totalAmount.toLocaleString()}</div></div>
     `;
     
-    // Render payment totals for dashboard
     renderPaymentTotals('paymentTotalsContainer', allRegistrations);
   }
 
@@ -1813,6 +1902,11 @@
     renderPaymentList();
   }
 
+  function clearDeletedFilters() {
+    if (DOM.deletedSearchInput) DOM.deletedSearchInput.value = '';
+    renderDeletedTable();
+  }
+
   DOM.exportBtn?.addEventListener('click', () => {
     const filtered = getFilteredRegistrations();
     if (!filtered.length) { showToast('No data to export', true); return; }
@@ -1860,30 +1954,12 @@
   DOM.clearFiltersBtn?.addEventListener('click', clearFilters);
   DOM.clearMedicalFiltersBtn?.addEventListener('click', clearMedicalFilters);
   DOM.clearPaymentFiltersBtn?.addEventListener('click', clearPaymentFilters);
+  DOM.clearDeletedFiltersBtn?.addEventListener('click', clearDeletedFilters);
   DOM.medicalSearchInput?.addEventListener('input', () => renderMedicalConditions());
   DOM.medicalDistanceFilter?.addEventListener('change', () => renderMedicalConditions());
   DOM.paymentSearchInput?.addEventListener('input', () => renderPaymentList());
   DOM.paymentStatusFilter?.addEventListener('change', () => renderPaymentList());
-
-  if (DOM.distanceTabs) {
-    // Generate distance tabs dynamically
-    const distances = ['5K', '10K', '21K', '42K'];
-    const icons = { '5K': 'fa-walking', '10K': 'fa-running', '21K': 'fa-trophy', '42K': 'fa-crown' };
-    let tabsHtml = `<button class="distance-tab active" data-distance="all"><i class="fas fa-users"></i> All</button>`;
-    distances.forEach(dist => {
-      tabsHtml += `<button class="distance-tab" data-distance="${dist}"><i class="fas ${icons[dist]}"></i> ${dist}</button>`;
-    });
-    DOM.distanceTabs.innerHTML = tabsHtml;
-
-    DOM.distanceTabs.querySelectorAll('.distance-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        DOM.distanceTabs.querySelectorAll('.distance-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentDistanceFilter = tab.getAttribute('data-distance');
-        renderDistanceCards();
-      });
-    });
-  }
+  DOM.deletedSearchInput?.addEventListener('input', () => renderDeletedTable());
 
   const navLinks = document.querySelectorAll('.sidebar nav a');
   navLinks.forEach(link => {
@@ -1893,13 +1969,13 @@
         const section = link.getAttribute('data-section');
         DOM.dashboardSection.style.display = section === 'dashboard' ? 'block' : 'none';
         DOM.paymentsSection.style.display = section === 'payments' ? 'block' : 'none';
-        DOM.distancesSection.style.display = section === 'distances' ? 'block' : 'none';
         DOM.medicalConditionsSection.style.display = section === 'medicalConditions' ? 'block' : 'none';
         DOM.statisticsSection.style.display = section === 'statistics' ? 'block' : 'none';
+        DOM.deletedSection.style.display = section === 'deleted' ? 'block' : 'none';
         if (section === 'statistics') renderCharts();
-        if (section === 'distances') renderDistanceCards();
         if (section === 'medicalConditions') renderMedicalConditions();
         if (section === 'payments') renderPaymentList();
+        if (section === 'deleted') renderDeletedTable();
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
         if (window.innerWidth <= 860) {
@@ -1946,6 +2022,7 @@
       return;
     }
     await fetchRegistrations();
+    await fetchDeletedRegistrations();
   });
 
   DOM.modalOverlay?.addEventListener('click', (e) => {
