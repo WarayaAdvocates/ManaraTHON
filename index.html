@@ -422,7 +422,7 @@
     <div class="subtitle">First Catbalogan City Manaragat Marathon and Fun Run</div>
     <div class="theme">Run with Purpose · Run with Pride</div>
     <div class="tagline">"Every stride tells a story."</div>
-    <div class="date-venue"><i class="fas fa-calendar-alt"></i> August 16, 2026 · <i class="fas fa-map-pin"></i> Catbalogan City, Samar</div>
+    <div class="date-venue"><i class="fas fa-calendar-alt"></i> October 31, 2026 · <i class="fas fa-map-pin"></i> Catbalogan City, Samar</div>
     </div>
 
     <!-- Deadline Banner -->
@@ -576,7 +576,7 @@
         <div class="receipt-upload" id="receiptUploadArea">
           <i class="fas fa-cloud-upload-alt"></i>
           <div class="file-name" id="fileNameDisplay">Click or drag to upload receipt</div>
-          <div class="file-size" id="fileSizeDisplay">Max 25MB · PNG, JPG, PDF</div>
+          <div class="file-size" id="fileSizeDisplay">Max 50MB · PNG, JPG, PDF</div>
           <input type="file" id="receiptFile" accept="image/png,image/jpeg,image/jpg,application/pdf">
         </div>
         <div class="hint">Attach a clear screenshot or photo of your payment confirmation.</div>
@@ -780,11 +780,11 @@
     const file = this.files[0];
     if (!file) return;
 
-    if (file.size > 25 * 1024 * 1024) {
-      showToast('File size exceeds 25MB limit.', 'error');
-      this.value = '';
-      return;
-    }
+if (file.size > 50 * 1024 * 1024) {
+  showToast('File size exceeds 50MB limit.', 'error');
+  this.value = '';
+  return;
+}
 
     const reader = new FileReader();
     reader.onload = function(ev) {
@@ -989,7 +989,7 @@
       receiptFile.value = '';
       receiptUploadArea.classList.remove('has-file');
       fileNameDisplay.textContent = 'Click or drag to upload receipt';
-      fileSizeDisplay.textContent = 'Max 25MB · PNG, JPG, PDF';
+      fileSizeDisplay.textContent = 'Max 50MB · PNG, JPG, PDF';
       
       openSuccessModal();
     } catch (error) {
